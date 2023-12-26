@@ -1,8 +1,15 @@
-import LandingPage from '@/components/LandingPage'
-import Image from 'next/image'
+// src/App.js
 
-export default function Home() {
+import React from 'react';
+import LandingPage from '@/components/LandingPage';
+import './App.css';
+
+function App() {
   return (
-    <LandingPage />
-  )
+    <div className="App">
+      <LandingPage />
+    </div>
+  );
 }
+
+export default App;
