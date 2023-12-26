@@ -1,6 +1,7 @@
 'use client'
 import React from 'react';
 import './LoginPage.css'; // Assuming you have a CSS file for styling
+import Layout from '../Layout/Layout';
 
 const LoginPage = () => {
   // Function to handle form submission
@@ -11,6 +12,7 @@ const LoginPage = () => {
   };
 
   return (
+    <Layout>
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
         <h2>Login</h2>
@@ -24,9 +26,10 @@ const LoginPage = () => {
           {/* <input type="password" id="password" name="password" required /> */}
           <input type="password" id="password" name="password"/>
         </div>
-        <button type="submit"><a href="/dashboard">Login</a></button>
+        <button type="submit" className='LoginBtn'><a href="/dashboard">Login</a></button>
       </form>
     </div>
+    </Layout>
   );
 };
 
