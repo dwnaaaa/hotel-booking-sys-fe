@@ -16,13 +16,15 @@ const LoginPage = () => {
         <h2>Login</h2>
         <div className="input-group">
           <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="username" required />
+          {/* <input type="text" id="username" name="username" required /> */}
+          <input type="text" id="username" name="username"/>
         </div>
         <div className="input-group">
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" required />
+          {/* <input type="password" id="password" name="password" required /> */}
+          <input type="password" id="password" name="password"/>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit"><a href="/dashboard">Login</a></button>
       </form>
     </div>
   );
