@@ -38,7 +38,7 @@
     border-radius: 4px;
   }
   
-  button {
+  .LoginBtn {
     width: 100%;
     padding: 10px;
     border: none;

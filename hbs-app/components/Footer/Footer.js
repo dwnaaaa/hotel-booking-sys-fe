@@ -1,7 +1,12 @@
+import React from 'react';
+import './Footer.css';
+
 const Footer = () => {
     return (
       <footer>
-        asasfasfas
+        <div className='footer'>
+          Footer
+        </div>
       </footer>
     );
   };
