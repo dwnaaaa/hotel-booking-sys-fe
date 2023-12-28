@@ -15,11 +15,12 @@ const AddBooking = () => {
     checkOutDate: '',
     roomType: '',
     numberOfRooms: 1,
+    roomNumber: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    onChange((prevDetails) => ({ ...prevDetails, [name]: value }));
+    setBookingDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -28,14 +29,41 @@ const AddBooking = () => {
   };
 
   const [showAdditionalForm, setShowAdditionalForm] = useState(false);
+  const [showPGForm, setShowPGForm] = useState(false);
+  const [showPrimaryGuestButton, setShowPrimaryGuestButton] = useState(true);
+  const [showGuestButton, setShowGuestButton] = useState(true);
+
 
   const handleButtonClick = () => {
+    setShowGuestButton(false);
     setShowAdditionalForm(true);
   };
 
+  const handleButtonClick1 = () => {
+    setShowPrimaryGuestButton(false); // Hide the Primary Guest Name button
+    setShowPGForm(true);
+  };
+
   const handleFormSubmit = (additionalDetails) => {
+    setShowGuestButton(true);
     setShowAdditionalForm(false); // Hide the additional form after submission
     onSubmit({ ...bookingDetails, ...additionalDetails });
+  };
+
+  const handleFormSubmit1 = (additionalDetails) => {
+    setShowPrimaryGuestButton(true); // Show the Primary Guest Name button when additional form is submitted
+    setShowPGForm(false); // Hide the additional form after submission
+    onSubmit({ ...bookingDetails, ...additionalDetails });
+  };
+
+  const handleCancelSubmit = (additionalDetails) => {
+    setShowGuestButton(true);
+    setShowAdditionalForm(false);
+  };
+
+  const handleCancelSubmit1 = (additionalDetails) => {
+    setShowPrimaryGuestButton(true); 
+    setShowPGForm(false); 
   };
 
   return (
@@ -45,20 +73,26 @@ const AddBooking = () => {
         <form className="form" onSubmit={handleSubmit}>
         <label>
         Primary Guest Name:
-        <button type="button" onClick={handleButtonClick}>
-          {bookingDetails.primaryGuest || 'Enter Primary Guest Name'}
-        </button>
-      </label>
+        {showPrimaryGuestButton && (
+          <button type="button" onClick={handleButtonClick1}>
+            {bookingDetails.primaryGuest || 'Enter Primary Guest Name'}
+          </button>
+        )}
+        </label>
+
+      {showPGForm && (
+        <AdditionalDetailsForm onSubmit={handleFormSubmit1} onCancel={handleCancelSubmit1} />
+      )}
       
       <label>
         Guest Names:
-        <button type="button" onClick={handleButtonClick}>
+        {showGuestButton && ( <button type="button" onClick={handleButtonClick}>
           {bookingDetails.guestNames || 'Enter Guest Names'}
-        </button>
+        </button> )}
       </label>
 
       {showAdditionalForm && (
-        <AdditionalDetailsForm onSubmit={handleFormSubmit} onCancel={() => setShowAdditionalForm(false)} />
+        <AdditionalDetailsForm onSubmit={handleFormSubmit} onCancel={handleCancelSubmit} />
       )}
 
       <label>
@@ -76,9 +110,10 @@ const AddBooking = () => {
       <label>
         Room Type:
         <select name="roomType" value={bookingDetails.roomType} onChange={handleChange}>
-          <option value="single">Single Room</option>
-          <option value="double">Double Room</option>
-          {/* Add other room types as needed */}
+          <option value="deluxe">Deluxe</option>
+          <option value="grand">Grand</option>
+          <option value="suite">Suite</option>
+          <option value="executive">Executive</option>
         </select>
       </label>
       <label>
@@ -90,6 +125,14 @@ const AddBooking = () => {
           onChange={handleChange}
           min="1"
         />  
+      </label>
+      <label>
+        Room Numbers:
+        <select name="roomNumber" value={bookingDetails.roomNumber} onChange={handleChange}>
+          <option value="room101">Room 101</option>
+          <option value="room102">Room 102</option>
+          <option value="room103">Room 103</option>
+        </select>
       </label>
       <button className="SubmitBtn" type="submit">Submit Booking</button>
     </form>
