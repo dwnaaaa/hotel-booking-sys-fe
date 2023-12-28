@@ -6,10 +6,15 @@ import './Header.css';
 const Header = () => {
   return (
     <header>
-      {/* Logo */}
-      <div className="logo">
-        <img src="https://i.pinimg.com/564x/de/1e/47/de1e47fb815592eac577b697b3c63248.jpg" alt="Logo" />
-      </div>
+    <div className="logo">
+        <img 
+            src="/logoheader.svg" 
+            alt="Logo" 
+            className="logo-image"
+        />
+    </div>
+
+
 
       {/* Navigation Buttons */}
       <nav>

@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -24,4 +24,52 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+@font-face {
+  font-family: 'MADEOuterSansThin';
+  src: url('/fonts/MADE Outer Sans Thin PERSONAL USE.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+
+
+body {
+  font-family: 'Open Sans', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 4rem;
+}
+
+header p {
+  font-size: 1rem;
+}
+
+h1{
+  font-family: 'MADEOuterSansThin', sans-serif;
+  font-size: 2rem;
+}
+
+h2{
+  font-weight: 400;
+}
+
+p{
+  line-height: 1.5;
 }
