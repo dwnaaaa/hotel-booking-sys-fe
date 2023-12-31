@@ -20,7 +20,7 @@ const LandingPage = () => {
         <a href="about" class="about-us-button">About Us</a>
     </div>
     <div class="column">
-        <p>As your host and the Chief Executive Office of this exquisite retreat, I am thrilled to invite you into a world where luxury meets comfort. Our dedicated team is committed to ensuring your stay is both memorable and rejuvenating, enveloping you in an ambiance of sophistication and serene elegance. We eagerly await the opportunity to make your experience with us nothing short of extraordinary.</p>
+        <p>As your host and the Chief Executive Officer of this exquisite retreat, I am thrilled to invite you into a world where luxury meets comfort. Our dedicated team is committed to ensuring your stay is both memorable and rejuvenating, enveloping you in an ambiance of sophistication and serene elegance. We eagerly await the opportunity to make your experience with us nothing short of extraordinary.</p>
 
         <section class="manager-message-section">
           <div class="left-column">
@@ -47,9 +47,6 @@ const LandingPage = () => {
         {/* Testimonials would go here */}
       </section>
 
-      <footer>
-        {/* Footer content here */}
-      </footer>
     </div>
     </Layout>
   );
