@@ -21,7 +21,7 @@ const LoginPage = () => {
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
       {/* <form className="login-form"> */}
-        <h2>Login</h2>
+        <h1>Log in</h1>
         <div className="input-group">
           <label htmlFor="username">Username</label>
           {/* <input type="text" id="username" name="username" required /> */}
@@ -33,7 +33,7 @@ const LoginPage = () => {
           <input type="password" id="password" name="password"/>
         </div>
         {/* <button type="submit" className='LoginBtn' onClick={() => router.push('/dashboard')}>Login</button> */}
-        <button type="submit" className='LoginBtn'>Login</button>
+        <button type="submit" className='LoginBtn'>Log in</button>
       </form>
     </div>
     </Layout>

@@ -1,15 +1,22 @@
 
 header {
+    position: fixed; /* Fixed position */
+    top: 0; /* Align to the top of the page */
+    left: 0; /* Align to the left of the page */
+    width: 100%; /* Full width */
+    z-index: 9999; /* Ensure it's above other elements */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-left: 50px;
     padding-right: 50px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: #212121;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #fff;
     color: #fff;
-  }
+    box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
   
   .logo img {
     max-height: 50px; /* Adjust the height as needed */
@@ -26,7 +33,7 @@ header {
   
   nav a {
     text-decoration: none;
-    color: #fff;
+    color: #000;
   }
   
   /* Header.css */
@@ -39,7 +46,7 @@ header {
 
 /* Add styles to make the button visually appealing */
 .book-now a {
-  padding: 8px 16px;
+  padding: 15px 25px;
   background-color: #d89300; /* Example color, you can change it */
   color: #fff;
   text-decoration: none;
@@ -48,7 +55,11 @@ header {
 }
 
 .book-now a:hover {
-  background-color: #ffc600; /* Example color on hover, you can change it */
+  background-color: #c07c00;
+}
+
+.book-now a:active {
+  background-color: #a76600;
 }
 
 .logo-image {

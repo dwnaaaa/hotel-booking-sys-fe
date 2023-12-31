@@ -1,0 +1,96 @@
+.container-flex {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 10px;
+    margin-bottom: -5px;
+}
+
+  .date-picker-container,
+  .guest-input-container {
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  .date-picker-container {
+    display: flex;
+    flex-direction: row; /* Changed from column to row */
+    gap: 10px; /* Adds space between check-in and check-out pickers */
+    width: 88%; /* Adjust as necessary */
+  }
+  
+  .guest-input-container {
+    flex-basis: 12%; /* Adjust this value to make the guest input shorter */
+    flex-shrink: 0; /* Prevents shrinking smaller than its content */
+  }
+  
+  .date-picker-container > div,
+  .guest-input-container > div {
+    margin-bottom: 10px; 
+  }
+  
+  .date-picker-container label,
+  .guest-input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+/* Styles for the date pickers and guest input */
+.react-datepicker__input-container input,
+.guest-input-container input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.react-datepicker__input-container input:focus,
+.guest-input-container input:focus {
+  outline: none;
+  border-color: #d89300;
+}
+
+.guest-input-container .guest-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .guest-input-container .guest-control input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: none;
+    text-align: center;
+  }
+  
+  .guest-input-container .guest-control button {
+    background-color: #d89300;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease; /* Smooth transition for color change */
+    }
+  
+    .guest-input-container .guest-control button:hover {
+        background-color: #b76e00; /* Darker shade for hover */
+    }
+
+    .guest-input-container .guest-control button:active {
+        background-color: #d89300; /* Different color when clicked */
+        transition: background-color 0.1s ease; /* Quicker transition for click */
+    }
+
+  
+  /* To ensure the input number doesn't show spinner */
+  .guest-input-container .guest-control input::-webkit-inner-spin-button,
+  .guest-input-container .guest-control input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Styling for the horizontal line */

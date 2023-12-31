@@ -1,0 +1,167 @@
+.room-card {
+    width: 300px; /* Custom width */
+    height: 480px; /* Custom height */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Stretches children to start and end */
+    height: 100%;
+    position: relative;
+}
+
+
+
+.room-image {
+    width: 100%;
+    max-height: 200px;
+    height: auto;
+    object-fit: cover;
+}
+
+.room-content {
+    padding: 25px;
+}
+
+.room-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.room-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.room-features li {
+    display: inline-block;
+    margin-right: 10px;
+    /* Add icons styling */
+}
+
+.room-price {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn-book {
+    background-color: #d89300;
+    color: white;
+    position: absolute;
+    z-index: 5; /* Higher than the content's z-index */
+    bottom: 235px; /* Adjust as needed */
+    right: 25px; /* Adjust as needed */
+    border-radius: 50%; /* For a circular button */
+    width: 50px; /* Size of the button */
+    height: 50px; /* Size of the button */
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0; /* Removes padding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-book svg {
+    fill: white; /* Color of the SVG */
+    width: 20px; /* Size of the SVG */
+    height: 20px; /* Size of the SVG */
+}
+
+
+.btn-book:hover {
+    background-color: #ffcc00;
+}
+
+.room-quantity-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .room-quantity-input:hover {
+    border-color: #888;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .room-quantity-input:focus {
+    border-color: #555;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+
+.room-input-container {
+    flex-shrink: 0;
+    width: 40%;
+}
+
+
+.room-input-container > div {
+    margin-bottom: 10px;
+}
+
+.room-input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.room-input-container .room-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.room-input-container .room-control input {
+    flex-grow: 1;
+    padding: 8px 10px;
+    border: none;
+    text-align: center;
+}
+
+.room-input-container .room-control button {
+    background-color: #d89300;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.room-input-container .room-control button:hover {
+    background-color: #b76e00; /* Darker shade for hover */
+}
+
+.room-input-container input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.room-input-container input:focus {
+    outline: none;
+    border-color: #d89300;
+}
+
+.room-input-container .room-control input::-webkit-inner-spin-button,
+.room-input-container .room-control input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.room-card .btn-book {
+    margin-top: auto; /* Pushes the button to the bottom */
+    align-self: flex-end; /* Aligns the button to the right */
+}

@@ -73,3 +73,78 @@ h2{
 p{
   line-height: 1.5;
 }
+
+hr {
+  border: 1px solid #dfdfdf; /* Set the border style and color */
+  margin: 30px 0; /* Add top and bottom margins to control spacing */
+
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd; /* Example color */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 50%; /* Circular shape */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container.single-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.button:hover {
+  background-color: #c07c00;
+}
+
+.button:active {
+  background-color: #a76600;
+}
+
+.button .icon {
+  fill: white; /* SVG color */
+  width: 24px; /* SVG width */
+  height: 24px; /* SVG height */
+}
+
+.button next{
+  justify-content: flex-end;
+}
+
+.confirm-booking-button {
+  background-color: #d89300; /* A warm, inviting color */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.confirm-booking-button:hover {
+  background-color: #c07c00; /* Slightly darker green for hover */
+}
+
+.confirm-booking-button:active {
+  background-color: #a76600; /* Even darker for click */
+  transform: translateY(2px); /* Slight push down effect */
+}
