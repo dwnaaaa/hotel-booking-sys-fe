@@ -1,0 +1,27 @@
+.card {
+    background-color: white; /* Set a background color */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Space inside the card */
+    margin: 10px; /* Space outside the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+    cursor: pointer; /* Indicates the card is interactive */
+  }
+  
+  .card:hover {
+    transform: translateY(-5px); /* Slightly raise the card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increase shadow on hover for a "lifting" effect */
+  }
+  
+  .card h3 {
+    margin-top: 0; /* Remove the top margin from the title */
+    color: #333; /* Dark color for the title */
+    font-size: 1.2em; /* Slightly larger font size for the title */
+  }
+  
+  .card p {
+    color: #666; /* Lighter color for content */
+    font-size: 1em; /* Regular font size for content */
+    margin-bottom: 0; /* Remove bottom margin from content */
+  }
+  

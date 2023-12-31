@@ -1,0 +1,72 @@
+.booking-card {
+    background-color: white; /* Set a background color */
+    border-radius: 10px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Space inside the card */
+    margin-bottom: 15px; /* Space outside the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
+    cursor: pointer; /* Indicates the card is interactive */
+    width: 82%;
+}
+
+.room-details {
+    display: flex;       /* Use flexbox */
+    align-items: center; /* Align items vertically in the center */
+    gap: 10px;           /* Optional: Add some space between the elements */
+  }
+  
+.booking-cards-container {
+    height: 600px; /* Example fixed height */
+    overflow-y: scroll; /* Enables vertical scrolling */
+    padding: 10px; /* Optional, for internal spacing */
+    border: none; /* Optional, for styling */
+    border-radius: 5px; /* Optional, for styling */
+  }
+
+.booking-card:hover {
+    transform: translateY(-5px); /* Slightly raise the card on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increase shadow on hover for a "lifting" effect */
+}
+
+.booking-card h4 {
+    margin-top: 0; /* Remove the top margin from the title */
+    color: #333; /* Dark color for the title */
+    font-size: 0.9em; /* Slightly larger font size for the title */
+}
+
+.booking-card p {
+    color: #666; /* Lighter color for content */
+    font-size: 1em; /* Regular font size for content */
+    margin-bottom: 0; /* Remove bottom margin from content */
+    line-height: 1;
+}
+
+/* Style the scrollbar (Chrome, Safari, Edge) */
+.booking-cards-container::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+  }
+  
+  .booking-cards-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+  }
+  
+  .booking-cards-container::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar itself */
+    border-radius: 6px; /* Roundness of the scrollbar */
+  }
+  
+  .booking-cards-container::-webkit-scrollbar-thumb:hover {
+    background: #d89300; /* Color when hovered */
+  }
+  
+  /* Style the scrollbar (Firefox) */
+  .booking-cards-container {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: #888 #f1f1f1; /* thumb and track color */
+  }
+  
+  /* Style the scrollbar for IE and Edge */
+  .booking-cards-container {
+    -ms-overflow-style: -ms-autohiding-scrollbar; /* auto-hiding scrollbar */
+  }
+  
