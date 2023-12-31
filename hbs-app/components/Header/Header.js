@@ -8,7 +8,7 @@ const Header = () => {
     <header>
     <div className="logo">
         <img 
-            src="/logoheader.svg" 
+            src="/logoheader.png" 
             alt="Logo" 
             className="logo-image"
         />
