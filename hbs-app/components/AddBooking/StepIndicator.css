@@ -1,0 +1,82 @@
+.step-indicator-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative; /* Needed for absolute positioning of lines */
+}
+
+.step-container {
+    flex-grow: 1;
+    text-align: center;
+    position: relative; /* Needed for absolute positioning of lines */
+}
+
+.step-container:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: 15px; /* Adjust this value to vertically center the line */
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background: #ddd; /* Line color */
+    z-index: 1; /* Ensures the line is behind the step number */
+}
+
+.step-number {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+    color: #fff;
+    position: relative;
+    z-index: 2; /* Ensures the step number is above the line */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* other styles... */
+}
+  
+  .active-step .step-number {
+    background-color: #d89300; /* Change to your theme color */
+  }
+  
+  .step-title {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .step:hover .step-number {
+    background-color: #f0ad4e; /* Adjust color as needed */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.completed-step .step-number {
+    background-color: #5cb85c; /* Completed step color */
+    box-shadow: 0 2px 4px rgba(0, 128, 0, 0.4); /* Greenish shadow */
+}
+
+.active-step .step-number {
+    animation: pulse 1s infinite;
+}
+
+
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+    .step-number {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+    }
+
+    .step-title {
+        font-size: 12px;
+    }
+}

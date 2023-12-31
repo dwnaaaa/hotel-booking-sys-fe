@@ -1,0 +1,86 @@
+.confirmation-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.confirmation-container h3 {
+    text-align: center;
+    color: #333;
+}
+
+.booking-summary {
+    background-color: #f9f9f9;
+    padding: 35px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.booking-summary h4 {
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.guest-details {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.guest-details:last-child {
+    border-bottom: none;
+}
+
+.guest-details p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.confirmation-wrapper {
+    max-width: 600px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.confirmation-container {
+    /* ... other styles ... */
+    background-color: #faefd7;
+    padding: 20px;
+    position: relative;
+    border-bottom: 2px dashed #d89300;
+}
+
+.receipt-rip {
+    height: 25px;
+    background-color: white;
+    border-top: 2px dashed #d89300;
+    position: relative;
+    top: -2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.receipt-rip::before, .receipt-rip::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-repeat: repeat-x;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6"><path d="M0 1 L2 0 L4 2 L6 1 L6 3 L4 4 L2 2 L0 3 Z" fill="#fff"/></svg>');
+}
+
+.receipt-rip::before {
+    left: -10px;
+    border-radius: 10px 0 0 10px;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.receipt-rip::after {
+    right: -10px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+}
