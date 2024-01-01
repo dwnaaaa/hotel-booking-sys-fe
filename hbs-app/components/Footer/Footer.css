@@ -3,6 +3,13 @@
     color: #f5f5f5;
     text-align: center;
     padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* min-height: 100vh; */
+    width: 100%;
+    max-width: 1920px; /* Maximum width */
+    margin: 0 auto; /* Center the container */
 }
 
 .footer-image{
@@ -157,6 +164,34 @@
     border: none;
 }
 
+.clock {
+    color: #333;
+    font-family: 'Arial', sans-serif;
+  }
+
+.clock h3{
+    font-size: 40px;
+    color: #e2e2e2;
+    margin: 0.5em 0;
+    /* Add other styles as needed */
+  }
+  
+
+  .clock-info {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+  
+  
+  .clock-date, .clock-timezone {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  .clock-timezone {
+    font-style: italic;
+  }
 
 @media (max-width: 768px) {
     .footer-content {

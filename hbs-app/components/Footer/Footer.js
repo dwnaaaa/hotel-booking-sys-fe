@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import './Footer.css';
+import Clock from './Clock';
 
 const Footer = () => {
     return (
@@ -15,7 +18,8 @@ const Footer = () => {
             <div className='footer-content'>
                 <div className='footer-section about'>
                     <h3>Le Bijou Magnifique</h3>
-                    <p>Welcome to HotelName, your home away from home. We offer the best in comfort and luxury.</p>
+                    <p>Welcome to Le Bijou Magnifique, your home away from home. We offer the best in comfort and luxury.</p>
+                    <Clock />
                 </div>
                 <div className='footer-section links'>
                     <h3>Quick Links</h3>

@@ -1,0 +1,53 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    /* This ensures there's no default margin or padding */
+  }
+  
+  .admin-panel-container {
+    width: 80%;
+    margin: 0 auto; /* Centering the container */
+    margin-top: 100px;
+    margin-bottom: 100px;
+  }
+  
+  .admin-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows cards to wrap in smaller screens */
+  }
+  
+  .admin-container a {
+    text-decoration: none; /* Removes underline from links */
+    color: inherit; /* Inherits the color from the parent element */
+}
+
+  .card {
+    flex: 1 1 18%; /* Adjust the percentage as needed */
+    margin: 10px; /* Adjust margin as needed */
+    text-align: center; /* Center the text inside the card */
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    margin: 0;
+    color: #333;
+    font-size: 1.5em;
+  }
+  
+  @media (max-width: 600px) {
+    .card {
+      flex-basis: 100%; /* Each card takes full width on small screens */
+      margin-bottom: 10px; /* Space between cards */
+    }
+  }
+  
