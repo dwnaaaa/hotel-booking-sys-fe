@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './BookingDetailsPopup.css'; // Make sure this is correctly imported
+import './HousekeepingPopup.css'; // Make sure this is correctly imported
 
-const BookingDetailsPopup = ({ bookingRef, onClose }) => {
+const HousekeepingPopup = ({ bookingRef, onClose }) => {
   const [damage, setDamage] = useState('');
   const [isCleaned, setIsCleaned] = useState(false);
   const [productQuantities, setProductQuantities] = useState({
@@ -91,4 +91,4 @@ const BookingDetailsPopup = ({ bookingRef, onClose }) => {
   );
 };
 
-export default BookingDetailsPopup;
+export default HousekeepingPopup;

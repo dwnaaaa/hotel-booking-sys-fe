@@ -3,15 +3,31 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
 import Card from './Card';
-import './FrontDesk.css';
+import './Dashboard.css';
 import BookingCard from './BookingCard';
-import BookingDetailsPopup from './BookingDetailsPopup'; // Import this component
+import HousekeepingPopup from './HousekeepingPopup'; // Import this component
+import BookingDetailsPopup from './BookingDetailsPopup';
+import KitchenPopup from './KitchenPopup';
+import ConciergePopup from './ConciergePopup';
+
 
 const FrontDesk = () => {
   const [selectedBooking, setSelectedBooking] = useState(null);
 
   const handleBookingClick = (booking) => {
-    setSelectedBooking(booking);
+    setSelectedBooking({ ...booking, type: 'frontdesk' });
+  };
+
+  const handleHousekeepingClick = (booking) => {
+    setSelectedBooking({ ...booking, type: 'housekeeping' });
+  };
+
+  const handleKitchenClick = (booking) => {
+    setSelectedBooking({ ...booking, type: 'kitchen' });
+  };
+
+  const handleConciergeClick = (booking) => {
+    setSelectedBooking({ ...booking, type: 'concierge' });
   };
 
   const closePopup = () => {
@@ -53,6 +69,9 @@ const FrontDesk = () => {
                 roomType={booking.roomType}
                 roomQuantity={booking.roomQuantity}
                 onBookingClick={() => handleBookingClick(booking)}
+                onHousekeepingClick={() => handleHousekeepingClick(booking)}
+                onKitchenClick={() => handleKitchenClick(booking)}
+                onConciergeClick={() => handleConciergeClick(booking)}
               />
             ))}
           </div>
@@ -64,7 +83,7 @@ const FrontDesk = () => {
           ))}
         </div>
 
-        {selectedBooking && (
+        {selectedBooking && selectedBooking.type === 'frontdesk' && (
           <BookingDetailsPopup
             bookingRef={selectedBooking.bookingRef}
             checkInTime={selectedBooking.checkInTime}
@@ -73,6 +92,28 @@ const FrontDesk = () => {
             onClose={closePopup}
           />
         )}
+
+        {selectedBooking && selectedBooking.type === 'housekeeping' && (
+          <HousekeepingPopup
+            bookingRef={selectedBooking.bookingRef}
+            onClose={closePopup}
+          />
+        )}
+
+        {selectedBooking && selectedBooking.type === 'kitchen' && (
+          <KitchenPopup
+            bookingRef={selectedBooking.bookingRef}
+            onClose={closePopup}
+          />
+        )}
+
+        {selectedBooking && selectedBooking.type === 'concierge' && (
+          <ConciergePopup
+            bookingRef={selectedBooking.bookingRef}
+            onClose={closePopup}
+          />
+        )}
+
       </div>
     </Layout>
   );
