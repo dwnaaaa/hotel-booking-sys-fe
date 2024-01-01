@@ -5,7 +5,7 @@ import './Header.css';
 
 const Header = () => {
   return (
-    <header>
+    <header className='header'>
     <div className="logo">
         <img 
             src="/logoheader.png" 

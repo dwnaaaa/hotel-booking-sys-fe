@@ -1,23 +1,21 @@
-
 header {
-    position: fixed; /* Fixed position */
-    top: 0; /* Align to the top of the page */
-    left: 0; /* Align to the left of the page */
-    width: 100%; /* Full width */
-    z-index: 9999; /* Ensure it's above other elements */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: #fff;
-    color: #fff;
-    box-sizing: border-box; /* Include padding and border in the width and height */
+  position: fixed; /* Fixed position */
+  top: 0; /* Align to the top of the page */
+  left: 50%; /* Align to the center of the page horizontally */
+  transform: translateX(-50%); /* Center the element */
+  width: 100%; /* Full width */
+  max-width: 1920px; /* Maximum width */
+  z-index: 999; /* Ensure it's above other elements */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px; /* Combined padding shorthand */
+  background-color: #fff;
+  color: #fff; /* Adjust if needed for visibility */
+  box-sizing: border-box; /* Include padding and border in the width and height */
 }
 
-  
+
   .logo img {
     max-height: 50px; /* Adjust the height as needed */
   }
