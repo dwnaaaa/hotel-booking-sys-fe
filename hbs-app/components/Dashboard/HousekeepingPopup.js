@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './HousekeepingPopup.css'; // Make sure this is correctly imported
+import './EmployeePopup.css';
 
 const HousekeepingPopup = ({ bookingRef, onClose }) => {
   const [damage, setDamage] = useState('');

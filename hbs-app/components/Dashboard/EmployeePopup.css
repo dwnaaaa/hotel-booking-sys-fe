@@ -14,10 +14,11 @@
   background-color: #fff; /* Set a light background color */
   border-radius: 8px; /* Add rounded corners for a modern look */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
-  padding: 30px; /* Add padding for content */
+  padding: 40px; /* Add padding for content */
   z-index: 1001;
   position: relative;
   overflow: auto; /* Enable scrolling for content if needed */
+  width: 375px;
 }
 
 .popup-backdrop {
@@ -36,6 +37,7 @@
 }
 
 
+
 .btn-clean {
   background-color: #adadad; /* Green */
   color: white;
@@ -46,6 +48,8 @@
   cursor: pointer;
   width: 45%;;
 }
+
+
 
 .input-damage {
   width: 50%;
@@ -60,8 +64,9 @@
   max-height: 200px;
   overflow-y: auto;
   border: none;
-  padding: 10px;
   margin-top: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
 
   /* Custom scrollbar styles */
   scrollbar-width: thin;
@@ -170,15 +175,39 @@
 
 .btn-confirm {
   background-color: #008CBA;
-  color: white;
+  color: white !important;
   padding: 10px 20px;
   margin-left: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.8rem;
 }
 
 .btn-confirm:hover {
   background-color: #007B9E; /* Slightly darker blue on hover */
+}
+
+.btn-confirm:hover, .btn-confirm:active {
+  text-decoration: none; /* Removes underline on hover/active */
+  /* Add other hover styles here */
+}
+
+.service-code-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.service-code-input {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }

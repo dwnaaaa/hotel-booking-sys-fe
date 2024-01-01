@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
-import './HousekeepingPopup.css'; // Make sure this is correctly imported
+import './EmployeePopup.css';
 
 const KitchenPopup = ({ bookingRef, onClose }) => {
-  // const [damage, setDamage] = useState('');
-  // const [isCleaned, setIsCleaned] = useState(false);
   const [productQuantities, setProductQuantities] = useState({
     Breakfast: 0,
     Lunch: 0,
-    Dinner: 0
+    Dinner: 0,
+    Midnight: 0,
+    Merienda: 0,
   });
 
   const [beverageQuantities, setBeverageQuantities] = useState({
     Water: 0,
     Coke: 0,
-    Juice: 0
+    Juice: 0,
+    Wine: 0,
+    Alcohol: 0,
   });
-
-  // const handleCleanClick = () => {
-  //   setIsCleaned(prevState => !prevState);
-  //   console.log("Room cleaning status toggled:", bookingRef, !isCleaned);
-  // };
-
-  // const handleDamageChange = (event) => {
-  //   setDamage(event.target.value);
-  // };
 
   const handleProductQuantityChange = (product, value) => {
     const newQuantity = value === '' ? 0 : parseInt(value, 10);
@@ -33,14 +26,18 @@ const KitchenPopup = ({ bookingRef, onClose }) => {
     }));
   };
 
-
-  const handleConfirm = () => {
-    // Handle confirm logic here
-    console.log("Confirm actions for room", bookingRef);
-    onClose(); // Assuming you want to close the popup after confirm
+  const handleBeverageQuantityChange = (beverage, value) => {
+    const newQuantity = value === '' ? 0 : parseInt(value, 10);
+    setBeverageQuantities(prevQuantities => ({
+      ...prevQuantities,
+      [beverage]: newQuantity
+    }));
   };
 
-
+  const handleConfirm = () => {
+    console.log("Confirm actions for room", bookingRef);
+    onClose(); 
+  };
 
   return (
     <div className="popup-container">
@@ -49,45 +46,40 @@ const KitchenPopup = ({ bookingRef, onClose }) => {
         <h2>Kitchen - Room {bookingRef}</h2>
 
         <label>Food</label>
-
         <div className="products-scrollbox">
-        <div className="products-flexbox">
-        {Object.entries(productQuantities).map(([product, quantity]) => (
-          <div key={product} className="product-item">
-            <div>{product}</div>
-            <input 
-              type="number" 
-              min="0" 
-              className="product-quantity-input"
-              value={quantity.toString()} // Convert number to string for the input value
-              onChange={e => handleProductQuantityChange(product, e.target.value)}
-            />
+          <div className="products-flexbox">
+            {Object.entries(productQuantities).map(([product, quantity]) => (
+              <div key={product} className="product-item">
+                <div>{product}</div>
+                <input 
+                  type="number" 
+                  min="0" 
+                  className="product-quantity-input"
+                  value={quantity.toString()}
+                  onChange={e => handleProductQuantityChange(product, e.target.value)}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
         </div>
 
         <label>Beverages</label>
-
         <div className="products-scrollbox">
-        <div className="products-flexbox">
-        {Object.entries(beverageQuantities).map(([beverage, quantity]) => (
-          <div key={beverage} className="product-item">
-            <div>{beverage}</div>
-            <input 
-              type="number" 
-              min="0" 
-              className="product-quantity-input"
-              value={quantity.toString()} // Convert number to string for the input value
-              onChange={e => handleProductQuantityChange(beverage, e.target.value)}
-            />
+          <div className="products-flexbox">
+            {Object.entries(beverageQuantities).map(([beverage, quantity]) => (
+              <div key={beverage} className="product-item">
+                <div>{beverage}</div>
+                <input 
+                  type="number" 
+                  min="0" 
+                  className="product-quantity-input"
+                  value={quantity.toString()}
+                  onChange={e => handleBeverageQuantityChange(beverage, e.target.value)}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
         </div>
-
 
         <div className="action-buttons">
           <button onClick={onClose} className="btn-close">Close</button>

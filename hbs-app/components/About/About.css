@@ -1,0 +1,82 @@
+.about-container {
+    margin: 100px auto;
+    max-width: 1200px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  
+  .about-container h1 {
+    text-align: center;
+    color: #003366; /* Adjust the color to match your branding */
+  }
+  
+  .about-container p {
+    text-align: justify;
+    color: #333;
+  }
+  
+  section {
+    margin-bottom: 40px;
+  }
+  
+  section h2 {
+    color: #003366; /* Adjust the color to match your branding */
+    margin-bottom: 10px;
+  }
+  
+  section p {
+    line-height: 1.6;
+  }
+  
+  /* Team Profiles and Testimonials could have a different layout */
+  .team-profiles, .testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Add styles for images, buttons, or any other elements you include */
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .about-container {
+      padding: 10px;
+    }
+  
+    .team-profiles, .testimonials {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .team-profiles {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .team-member-card {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .team-member-photo {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .team-member-info {
+    padding: 20px;
+  }
+  

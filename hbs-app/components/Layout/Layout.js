@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <main className="main-content">{children}</main> {/* Apply the class here */}
+      <main className="main-content">{children}</main>
       <Footer />
     </>
   );
