@@ -1,0 +1,50 @@
+/* Checkout.module.css */
+
+.checkout-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .payment-summary {
+    margin-bottom: 20px;
+  }
+  
+  .payment-method {
+    margin-bottom: 20px;
+  }
+  
+/* Checkout.module.css */
+
+.card-details {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .card-details label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .card-details input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .expiration-cvv {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  /* Add more styles as needed */
+  
