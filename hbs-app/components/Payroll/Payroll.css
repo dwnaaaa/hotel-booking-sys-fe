@@ -1,0 +1,32 @@
+/* Payroll.css */
+
+.payroll-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 20px;
+    margin: 20px; /* Add margin to the entire container */
+  }
+  
+  .payroll-column {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    margin: 5px; /* Add margin to each column */
+  }
+
+  .submit-button {
+    margin: 20px; /* Add margin to the top for spacing */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+  }
+  
