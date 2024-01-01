@@ -6,11 +6,11 @@
     margin: 10px; /* Space outside the card */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for hover effects */
     cursor: pointer; /* Indicates the card is interactive */
+    width: 130px;
   }
   
   .card:hover {
     transform: translateY(-5px); /* Slightly raise the card on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increase shadow on hover for a "lifting" effect */
   }
   
   .card h3 {
@@ -23,5 +23,20 @@
     color: #666; /* Lighter color for content */
     font-size: 1em; /* Regular font size for content */
     margin-bottom: 0; /* Remove bottom margin from content */
+  }
+  
+  .status-indicator {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .status-occupied {
+    background-color: red;
+  }
+  
+  .status-available {
+    background-color: green;
   }
   

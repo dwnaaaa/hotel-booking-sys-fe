@@ -50,10 +50,34 @@ const FrontDesk = () => {
     // ... Add more bookings as needed
   ];
 
-  const cardsData = Array.from({ length: 20 }, (_, i) => ({
-    title: `Room ${i + 1}`,
-    content: 'This is a sample card content.'
-  }));
+  const getRoomType = (roomNumber) => {
+    if (roomNumber >= 1 && roomNumber <= 5) {
+      return 'Twin';
+    } else if (roomNumber >= 6 && roomNumber <= 10) {
+      return 'Deluxe Twin';
+    } else if (roomNumber >= 11 && roomNumber <= 15) {
+      return 'Double Deck';
+    } else if (roomNumber >= 16 && roomNumber <= 20) {
+      return 'King';
+    }
+  };
+
+  const getRandomStatus = () => Math.random() > 0.5 ? 'occupied' : 'available';
+
+  const cardsData = Array.from({ length: 20 }, (_, i) => {
+    const roomNumber = i + 1;
+    const roomType = getRoomType(roomNumber);
+    const status = getRandomStatus();
+    console.log(`Room ${roomNumber}: ${status}`); // Log the status
+    return {
+      title: `Room ${roomNumber}`,
+      content: `${roomType}`,
+      status: status
+    };
+  });
+
+  
+  
 
   return (
     <Layout>
@@ -79,7 +103,7 @@ const FrontDesk = () => {
 
         <div className="column column-right">
           {cardsData.map((card, index) => (
-            <Card key={index} title={card.title} content={card.content} />
+            <Card key={index} title={card.title} content={card.content} status={card.status}/>
           ))}
         </div>
 
