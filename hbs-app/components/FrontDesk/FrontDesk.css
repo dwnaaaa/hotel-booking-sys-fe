@@ -34,4 +34,11 @@
     margin-left: 10px; /* Adjust if necessary to position the line correctly */
   }
 
+.front-desk-container.popup-open {
+  pointer-events: none;
+  opacity: 0.5; /* Adjust opacity as needed */
+}
+
+/* Add more styles as needed */
+
   

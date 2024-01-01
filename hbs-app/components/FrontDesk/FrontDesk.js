@@ -1,4 +1,6 @@
-import React from 'react';
+'use client'
+
+import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
 import Card from './Card';
 import './FrontDesk.css';
@@ -37,9 +39,19 @@ const confirmedBookings = [
 ];
 
 const FrontDesk = () => {
+  const [isPopupOpen, setPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
+
   return (
     <Layout>
-      <div className="front-desk-container">
+      <div className={`front-desk-container ${isPopupOpen ? 'popup-open' : ''}`}>
         <div className="column column-left">
           <h1>Bookings</h1>
           <div className="booking-cards-container">
@@ -50,12 +62,14 @@ const FrontDesk = () => {
               checkInTime={booking.checkInTime}
               roomType={booking.roomType}
               roomQuantity={booking.roomQuantity}
+              onPopupOpen={openPopup}
+              onPopupClose={closePopup}
             />
           ))}
           </div>
         </div>
         
-        <div className="column column-right">
+        <div className={`column column-right ${isPopupOpen ? 'popup-open' : ''}`}>
         {cardsData.map((card, index) => (
             <Card key={index} title={card.title} content={card.content} />
           ))}

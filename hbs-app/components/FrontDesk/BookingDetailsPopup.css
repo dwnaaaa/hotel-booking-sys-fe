@@ -1,0 +1,29 @@
+/* BookingDetailsPopup.css */
+
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .booking-details-popup {
+    background-color: white;
+    padding: 20px;
+    z-index: 2; /* Ensure the popup is above the backdrop */
+  }
+  
+  .popup-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    z-index: 1; /* Ensure the backdrop is behind the popup */
+  }
+  
