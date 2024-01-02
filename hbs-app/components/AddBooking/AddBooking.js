@@ -11,52 +11,72 @@ import StepIndicator from './StepIndicator';
 const AddBooking = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [bookingDetails, setBookingDetails] = useState({
+    guestCount: '',
+    checkInDate:'',
+    checkOutDate:'',
     roomType: '',
-    numberOfGuests: '',
-    guestDetails: {},
-    paymentInfo: {}
-    // Add other necessary fields
+    numberOfRooms:'',
   });
 
+  const [guestDetails, setGuestDetails] = useState({
+    primaryGuest: {},
+    extraGuests: []
+  });
+
+  const handleGuestDetailsChange = (primaryGuest, extraGuests) => {
+    setGuestDetails({
+      primaryGuest,
+      extraGuests
+    });
+  };
+
   const updateBookingDetails = (details) => {
-    setBookingDetails(prev => ({ ...prev, ...details }));
+    setBookingDetails((prev) => ({ ...prev, ...details }));
+  };
+
+  const handleNextStep = async (details) => {
+      updateBookingDetails(details);
+
+      setBookingDetails((updatedDetails) => {
+        return updatedDetails;
+      });
+
+      console.log('Booking Details:', bookingDetails);
+      setCurrentStep(2);
   };
 
   return (
     <Layout>
       <div className="add-booking-wrapper">
+        <div className="container">
+          <h1>Add Booking</h1>
+          <StepIndicator currentStep={currentStep} />
+          <hr />
 
+          {currentStep === 1 && (
+            <ChooseRoomComponent
+              onNextStep={handleNextStep}
+              // onRoomSelectionChange={updateBookingDetails}
+            />
+          )}
 
-      <div className="container">
-        <h1>Add Booking</h1>
-        <StepIndicator currentStep={currentStep} />
-
-        <hr /> 
-        
-        {currentStep === 1 && (
-          <ChooseRoomComponent
-            onNextStep={() => setCurrentStep(2)}
-            onRoomSelectionChange={updateBookingDetails}
-          />
-        )}
-        {currentStep === 2 && (
-          <GuestDetailsComponent
-            onPreviousStep={() => setCurrentStep(1)}
-            onNextStep={() => setCurrentStep(3)}
-            onGuestDetailsChange={updateBookingDetails}
-          />
-        )}
-        {currentStep === 3 && (
-          <ConfirmationComponent
-            onPreviousStep={() => setCurrentStep(2)}
-            bookingDetails={bookingDetails}
-          />
-        )}
+          {currentStep === 2 && (
+            <GuestDetailsComponent
+              onPreviousStep={() => setCurrentStep(1)}
+              onNextStep={() => setCurrentStep(3)}
+              onBookingDetails={bookingDetails}
+              onGuestDetailsChange={handleGuestDetailsChange}
+            />
+          )}
+          {currentStep === 3 && (
+            <ConfirmationComponent
+              onPreviousStep={() => setCurrentStep(2)}
+              onBookingDetails={bookingDetails}
+              guestDetails={guestDetails}
+            />
+          )}
+        </div>
       </div>
-
-
-      </div>
-      
     </Layout>
   );
 };

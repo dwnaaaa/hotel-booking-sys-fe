@@ -1,36 +1,18 @@
 import React from 'react';
 import './ConfirmationComponent.css';
 
-const ConfirmationComponent = ({ onPreviousStep }) => {
-    // Static booking details for demonstration
+const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails }) => {
+
     const bookingDetails = {
-        roomType: "Deluxe Suite",
-        numberOfGuests: 2,
+        roomType: onBookingDetails.roomType,
+        numberOfGuests: onBookingDetails.guestCount,
         guests: [
             {
-                firstName: "John",
-                middleName: "A.",
-                lastName: "Doe",
-                birthday: "1980-01-01",
-                street: "123 Main St",
-                city: "Anytown",
-                state: "State",
-                zipCode: "12345",
-                contactNumber: "123-456-7890",
-                emailAddress: "john.doe@example.com"
+                ...guestDetails.primaryGuest,
             },
-            {
-                firstName: "Jane",
-                middleName: "B.",
-                lastName: "Doe",
-                birthday: "1985-02-02",
-                street: "456 Elm St",
-                city: "Othertown",
-                state: "AnotherState",
-                zipCode: "54321",
-                contactNumber: "098-765-4321",
-                emailAddress: "jane.doe@example.com"
-            }
+                ...guestDetails.extraGuests.map((guest, index) => ({
+                    ...guest,
+            }))
         ]
     };
 

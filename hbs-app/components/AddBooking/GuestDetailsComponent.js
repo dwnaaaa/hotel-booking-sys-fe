@@ -14,33 +14,38 @@ const initialGuest = {
   emailAddress: ''
 };
 
-const GuestDetailsComponent = ({ onPreviousStep, onNextStep }) => {
+const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, onGuestDetailsChange }) => {
   const [primaryGuest, setPrimaryGuest] = useState(initialGuest);
   const [extraGuests, setExtraGuests] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [guestsPerPage, setGuestsPerPage] = useState(1);
+
 
   const handlePrimaryGuestChange = (event) => {
     setPrimaryGuest({ ...primaryGuest, [event.target.name]: event.target.value });
+    onGuestDetailsChange({ ...primaryGuest, [event.target.name]: event.target.value }, extraGuests);
   };
 
   const handleExtraGuestChange = (index, event) => {
     const updatedExtraGuests = [...extraGuests];
     updatedExtraGuests[index] = { ...updatedExtraGuests[index], [event.target.name]: event.target.value };
     setExtraGuests(updatedExtraGuests);
+    onGuestDetailsChange(primaryGuest, updatedExtraGuests);
   };
 
-  const handleAddExtraGuest = () => {
-    setExtraGuests([...extraGuests, initialGuest]);
-  };
-
-  const handleRemoveExtraGuest = (index) => {
-    const updatedExtraGuests = extraGuests.filter((_, i) => i !== index);
-    setExtraGuests(updatedExtraGuests);
-    if (currentPage >= updatedExtraGuests.length && currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+  const renderGuestForms = () => {
+    const guestForms = [];
+  
+    const startIdx = currentPage * guestsPerPage; 
+    const endIdx = startIdx + guestsPerPage;
+  
+    for (let i = startIdx; i < endIdx && i < onBookingDetails.guestCount-1; i++) {
+      guestForms.push(renderGuestForm(extraGuests[i] || initialGuest, i));
     }
+  
+    return guestForms;
   };
-
+  
   const renderGuestForm = (guest, index, isPrimary = false) => (
     <div key={isPrimary ? 'primary' : index} className="guest-form">
       <h2>{isPrimary ? 'Primary Guest' : `Extra Guest ${index + 1}`}</h2>
@@ -146,18 +151,16 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep }) => {
     />
 
     </div>
-</div>
+  </div>
 
-
-      {!isPrimary && (
-        <button type="button" onClick={() => handleRemoveExtraGuest(index)}>Remove Guest</button>
-      )}
     </div>
   );
 
   const renderPaginationButtons = () => {
     const buttons = [];
-    for (let i = 0; i < extraGuests.length; i++) {
+    const totalPages = onBookingDetails.guestCount-1;
+  
+    for (let i = 0; i < totalPages; i++) {
       buttons.push(
         <button
           key={i}
@@ -168,6 +171,7 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep }) => {
         </button>
       );
     }
+  
     return buttons;
   };
 
@@ -178,13 +182,12 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep }) => {
 
       <hr />
 
-      {extraGuests.length > 0 && renderGuestForm(extraGuests[currentPage], currentPage)}
+      {renderGuestForms()}
+      
       <div className="pagination-container">
         {renderPaginationButtons()}
       </div>
-      <div className="button-container">
-        <button onClick={handleAddExtraGuest}>Add Extra Guest</button>
-      </div>
+
       <div className="button-container">
 
       <button onClick={onPreviousStep} className="button previous">
