@@ -1,0 +1,38 @@
+.booking-popup-content h3{
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.booking-popup-content .flex-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .booking-popup-content .left-column, 
+  .booking-popup-content .right-column {
+    flex: 1;
+  }
+  
+  .booking-popup-content .checkin-checkout {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .booking-popup-content .checkin, 
+  .booking-popup-content .checkout {
+    flex: 1;
+  }
+  
+  .rooms-booked{
+    margin-top: 30px;
+  }
+  
+  .booking-popup-content small {
+    font-size: 0.7rem;
+    color: #666;
+    display: block;
+    margin-top: 4px;
+    font-weight: 800;
+    line-height: 0.6rem;
+    text-transform: uppercase;
+}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './EmployeePopup.css';
+import './PopupGlobal.css';
 
 const ConciergePopup = ({ bookingRef, onClose }) => {
   const serviceCodeMap = {

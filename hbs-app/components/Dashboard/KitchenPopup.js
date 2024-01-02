@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './EmployeePopup.css';
+import './PopupGlobal.css';
 
 const KitchenPopup = ({ bookingRef, onClose }) => {
   const [productQuantities, setProductQuantities] = useState({
