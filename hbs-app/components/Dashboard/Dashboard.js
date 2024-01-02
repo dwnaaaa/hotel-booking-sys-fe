@@ -120,7 +120,19 @@ const FrontDesk = () => {
 
         <div className="column column-right">
           {cardsData.map((card, index) => (
-            <Card key={index} title={card.title} content={card.content} status={card.status}/>
+            <Card 
+            key={index} 
+            title={card.title} 
+            content={card.content} 
+            status={card.status}
+            bookingRef={card.bookingRef}
+            checkInTime={card.checkInTime}
+            roomType={card.roomType}
+            roomQuantity={card.roomQuantity}
+            onBookingClick={() => handleBookingClick(card)}
+            onHousekeepingClick={() => handleHousekeepingClick(card)}
+            onKitchenClick={() => handleKitchenClick(card)}
+            onConciergeClick={() => handleConciergeClick(card)}/>
           ))}
         </div>
 

@@ -3,7 +3,12 @@
 
 import React from 'react';
 import './BookingCard.css';
-import Button from './Button';
+import Button from './Buttons/Button';
+import FrontDesk from './Dashboard';
+import FrontDeskButton from './Buttons/FrontDeskButton';
+import ConciergeButton from './Buttons/ConciergeButton';
+import KitchenButton from './Buttons/KitchenButton';
+import HousekeepingButton from './Buttons/HousekeepingButton';
 
 
 
@@ -18,10 +23,10 @@ const BookingCard = ({ bookingRef, checkInTime, roomType, roomQuantity, onBookin
     <div className="booking-card">
             
           <div className="buttons-container">
-            <Button onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
-            <Button onClick={() => onHousekeepingClick({bookingRef})} label="" />
-            <Button onClick={() => onKitchenClick({bookingRef})} label="" />
-            <Button onClick={() => onConciergeClick({bookingRef})} label="" />
+            <FrontDeskButton onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
+            <HousekeepingButton onClick={() => onHousekeepingClick({bookingRef})} label="" />
+            <KitchenButton onClick={() => onKitchenClick({bookingRef})} label="" />
+            <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
 
             <div className="cancel-button-container">
             <button onClick={handleCancel} className="cancel-button">
