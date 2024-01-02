@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './RoomCard.css'; // Path to your CSS file
 
-const RoomCard = ({ image, title, features, price, availableRooms }) => {
+const RoomCard = ({ image, title, features, maxGuests, price, availableRooms }) => {
 
     const [roomQuantity, setRoomQuantity] = useState(0);
 
@@ -31,6 +31,7 @@ const RoomCard = ({ image, title, features, price, availableRooms }) => {
                         <li key={index}>{feature}</li>
                     ))}
                 </ul>
+                <div className="room-maxGuests">Max Guests: {maxGuests}</div>
                 <div className="room-price">{price} per night</div>
                 <div className="room-selection">
                 <div className="room-input-container">

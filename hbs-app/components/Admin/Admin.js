@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '../Layout/Layout';
 import './Admin.css';
+import Dashboard from '../Dashboard/Dashboard';
 
 const Admin = () => {
   return (
@@ -32,7 +33,8 @@ const Admin = () => {
 
         <div className="admin-container">
 
-        <a href="/dashboard" className="card">
+        {/* <a href="/dashboard" className="admin_card"> */}
+        <a className="admin_card">
         <div className="card-image-container">
             <div className="image-wrapper">
             <img src="images\employee\frontdesk.jpg" alt="Front Desk" />
@@ -41,11 +43,12 @@ const Admin = () => {
 
         <div className="card-content">
         <h2 className="card-title">Front Desk</h2>
-            <p className="card-description">Manages guest bookings, check-ins, and check-outs.</p>
+            {/* <p className="card-description">Manages guest bookings, check-ins, and check-outs.</p> */}
         </div>
         </a>
 
-        <a href="/dashboard" className="card">
+        {/* <a href="/dashboard" className="admin_card"> */}
+        <a className="admin_card">
         <div className="card-image-container">
             <div className="image-wrapper">
             <img src="images\employee\housekeeping.jpg" alt="Housekeeping" />
@@ -54,11 +57,12 @@ const Admin = () => {
 
         <div className="card-content">
         <h2 className="card-title">Housekeeping</h2>
-            <p className="card-description">Responsible for room cleaning, minibar charges, and assessing damages for billing.</p>
+            {/* <p className="card-description">Responsible for room cleaning, minibar charges, and assessing damages for billing.</p> */}
         </div>
         </a>
 
-        <a href="/dashboard" className="card">
+        {/* <a href="/dashboard" className="admin_card"> */}
+        <a className="admin_card">
         <div className="card-image-container">
             <div className="image-wrapper">
             <img src="images\employee\kitchen.jpg" alt="Kitchen" />
@@ -67,11 +71,12 @@ const Admin = () => {
 
         <div className="card-content">
         <h2 className="card-title">Kitchen</h2>
-            <p className="card-description">Handles charges for in-house dining, including meals, alcohol, and special requests.</p>
+            {/* <p className="card-description">Handles charges for in-house dining, including meals, alcohol, and special requests.</p> */}
         </div>
         </a>
 
-        <a href="/dashboard" className="card">
+        {/* <a href="/dashboard" className="admin_card"> */}
+        <a className="admin_card">
         <div className="card-image-container">
             <div className="image-wrapper">
             <img src="images\employee\concierge.jpg" alt="Concierge" />
@@ -80,14 +85,15 @@ const Admin = () => {
 
         <div className="card-content">
         <h2 className="card-title">Concierge</h2>
-            <p className="card-description">Manages charges for additional services like spa treatments, transportation, and more.</p>
+            {/* <p className="card-description">Manages charges for additional services like spa treatments, transportation, and more.</p> */}
         </div>
         </a>
 
         </div>
 
     </div>
-        
+
+    <Dashboard />
     </Layout>
   );
 }
