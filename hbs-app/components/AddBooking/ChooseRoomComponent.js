@@ -12,6 +12,7 @@ const ChooseRoomComponent = ({ onNextStep }) => {
 
   const [guestCount, setGuestCount] = useState(1);
 
+  
   return (
     <div className="parent-container">    
       <div className="container-flex">
@@ -58,7 +59,7 @@ const ChooseRoomComponent = ({ onNextStep }) => {
 
 
 <div className="button-container single-button">
-    <button onClick={onNextStep} className="button next">
+    <button onClick={() => onNextStep({ guestCount,checkInDate,checkOutDate})} className="button next">
             <svg viewBox="0 0 24 24" class="icon">
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
             </svg>
