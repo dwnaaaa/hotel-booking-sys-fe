@@ -7,7 +7,53 @@
     margin-bottom: 100px;
     position: relative;
   }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-right: 40px;
+    /* Add any additional styling as needed */
+}
+
+.search-container {
+    display: flex;
+}
+
+#searchBar {
+  padding: 9px 12px;
+  border: none; /* Light grey border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 0.8rem;
+  outline: none; /* Removes default focus outline */
+  width: 264px;
+}
+
+
+
+.viewBill {
+  background-color: #d89300; /* Dark blue background */
+  color: white; /* White text */
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px; /* Rounded corners */
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Space between text and SVG */
+  cursor: pointer; /* Hand cursor on hover */
+
+}
+
+.viewBill:active {
+  background-color: #a76600;
+  transition: background-color 0.3s;
+}
   
+.viewBill:hover {
+  background-color: #c07c00;
+}
+
   .column {
     padding: 10px; /* Add some padding around the content */
   }
