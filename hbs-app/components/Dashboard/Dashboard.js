@@ -7,8 +7,8 @@ import './Dashboard.css';
 import BookingCard from './BookingCard';
 import HousekeepingPopup from './HousekeepingPopup/HousekeepingPopup';
 import BookingDetailsPopup from './BookingDetailsPopup/BookingDetailsPopup';
-import KitchenPopup from './KitchenPopup';
-import ConciergePopup from './ConciergePopup';
+import KitchenPopup from './KitchenPopup/KitchenPopup';
+import ConciergePopup from './ConciergePopup/ConciergePopup';
 
 
 const FrontDesk = () => {
@@ -181,6 +181,7 @@ const FrontDesk = () => {
         {selectedBooking && selectedBooking.type === 'kitchen' && (
           <KitchenPopup
             bookingRef={selectedBooking.bookingRef}
+            roomType={selectedBooking.roomType}
             onClose={closePopup}
           />
         )}

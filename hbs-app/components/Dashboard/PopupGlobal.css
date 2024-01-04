@@ -56,6 +56,12 @@
   text-transform: uppercase;
 }
 
+.details-popup h5{
+  margin-bottom: 0px;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
 .popup-backdrop {
   position: absolute;
   top: 0;

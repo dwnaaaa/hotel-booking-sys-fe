@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import ServicesCard from '../ServicesCard';
 import '../PopupGlobal.css';
 
-const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
+const ConciergePopup = ({ bookingRef,roomType, onClose }) => {
   const roomTypeImages = [
     { type: 'Deluxe', url: 'images/rooms/twin.jpg' },
     { type: 'Suite', url: 'images/rooms/king.jpg' },
@@ -29,45 +29,61 @@ const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
 
   const services = [
     {
-      id: "roomCleaning",
-      name: "Room Cleaning",
-      imageUrl: "images/housekeeping/cleaning.svg",
-      code: "1001"
+      id: "reservations",
+      name: "Reservations",
+      imageUrl: "images/concierge/reservations.svg",
+      code: "8001"
     },
     {
-      id: "laundryServices",
-      name: "Laundry Services",
-      imageUrl: "images/housekeeping/laundry.svg",
-      code: "1002" 
+      id: "eventPlanning",
+      name: "Event Planning",
+      imageUrl: "images/concierge/event.svg",
+      code: "8002"
     },
     {
-      id: "shoePolishing",
-      name: "Shoe Polishing",
-      imageUrl: "images/housekeeping/shoe.svg",
-      code: "1003"
+      id: "languageAssistance",
+      name: "Language Assist",
+      imageUrl: "images/concierge/language.svg",
+      code: "8003"
     },
     {
-      id: "packingServices",
-      name: "Packing Services",
-      imageUrl: "images/housekeeping/pack.svg",
-      code: "1004"
+      id: "shoppingAssistance",
+      name: "Shopping Assist",
+      imageUrl: "images/concierge/shopping.svg",
+      code: "8004"
+    },
+    {
+      id: "spaAndWellness",
+      name: "Spa and Wellness",
+      imageUrl: "images/concierge/spa.svg",
+      code: "8005"
     }
   ];
+  
 
-  const barItems = [
-    { id: "chips", name: "Chips", imageUrl: "images/bar/chips.webp", code: "2001" },
-    { id: "nuts", name: "Nuts", imageUrl: "images/bar/nuts.webp", code: "2002" },
-    { id: "chocolat", name: "Chocolate", imageUrl: "images/bar/chocolate.webp", code: "2003" },
-    { id: "candy", name: "Candy", imageUrl: "images/bar/candy.webp", code: "2004" },
-    { id: "cookies", name: "Cookies", imageUrl: "images/bar/cookies.webp", code: "2005" },
-    { id: "driedFruit", name: "Dried Fruit", imageUrl: "images/bar/driedfruits.webp", code: "2006" },
-    { id: "granolaBars", name: "Granola Bars", imageUrl: "images/bar/granola.webp", code: "2007" },
-    { id: "crackers", name: "Crackers", imageUrl: "images/bar/crackers.webp", code: "2008" },
-    { id: "popcorn", name: "Popcorn", imageUrl: "images/bar/popcorn.webp", code: "2009" },
-    { id: "cereal", name: "Cereal", imageUrl: "images/bar/cereals.webp", code: "2010" }
+  const transportationServices = [
+    {
+      id: "motorcycle",
+      name: "Motorcycle",
+      imageUrl: "images/concierge/motorcycle.svg",
+      code: "9001"
+    },
+    {
+      id: "fourSeaterCar",
+      name: "4-Seater Car",
+      imageUrl: "images/concierge/4seater.svg",
+      code: "9002"
+    },
+    {
+      id: "sixSeaterCar",
+      name: "6-Seater Car",
+      imageUrl: "images/concierge/6seater.svg",
+      code: "9003"
+    }
   ];
+  
 
-  const allItems = [...services, ...barItems];
+  const allItems = [...services, ...transportationServices];
 
   const [serviceCode, setServiceCode] = useState('');
   
@@ -102,7 +118,7 @@ const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
       <div className="details-popup">
         <button className="btn-close-circle" onClick={onClose}>
           <svg width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" strokeWidth="2"
           d="M18 6L6 18M6 6l12 12"/>
           </svg>
         </button>
@@ -149,9 +165,9 @@ const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
           ))}
         </div>
 
-        <h3>Room's Bar</h3>
+        <h5>Transportation Services</h5>
         <div className="services-container">
-        {barItems.map(item => (
+        {transportationServices.map(item => (
           <ServicesCard
             key={item.id}
             service={item.name}
@@ -178,4 +194,4 @@ const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
   );
 };
 
-export default HousekeepingPopup;
+export default ConciergePopup;

@@ -1,5 +1,6 @@
 import React from 'react';
 import './BookingDetailsPopup.css';
+import '../PopupGlobal.css';
 
 const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, roomQuantity,primaryGuestName, otherGuests, onClose }) => {
   const roomTypeImages = [
