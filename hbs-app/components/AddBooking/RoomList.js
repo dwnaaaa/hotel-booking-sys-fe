@@ -1,15 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import RoomCard from './RoomCard';
+import './RoomList.css';
 
 const RoomList = () => {
+
+    const [selectedRoomId, setSelectedRoomId] = useState(null);
+
+    const handleRoomSelect = (roomId) => {
+        if (selectedRoomId === roomId) {
+            setSelectedRoomId(null);
+        } else {
+            setSelectedRoomId(roomId);
+        }
+    };
+
+
     const rooms = [
         {
             id: 1,
             image: 'images/rooms/twin.jpg',
             title: 'Deluxe',
-            features: ['Twin Bed', 'Free Wi-Fi', 'Air Conditioning'],
             maxGuests: 2,
             price: '$120',
             availableRooms: 5
@@ -18,7 +30,6 @@ const RoomList = () => {
             id: 2,
             image: 'images/rooms/deluxe twin.jpg',
             title: 'Grand',
-            features: ['Deluxe Twin Bed', 'Free Wi-Fi', 'Air Conditioning'],
             maxGuests: 4,
             price: '$120',
             availableRooms: 5
@@ -27,7 +38,6 @@ const RoomList = () => {
             id: 3,
             image: 'images/rooms/double deck.jpg',
             title: 'Suite',
-            features: ['Double Deck Bed', 'Free Wi-Fi', 'Air Conditioning'],
             maxGuests: 8,
             price: '$120',
             availableRooms: 5
@@ -36,7 +46,6 @@ const RoomList = () => {
             id: 4,
             image: 'images/rooms/king.jpg',
             title: 'Executive',
-            features: ['King Bed', 'Free Wi-Fi', 'Air Conditioning'],
             maxGuests: 10,
             price: '$120',
             availableRooms: 5
@@ -48,7 +57,13 @@ const RoomList = () => {
     return (
         <div className="room-list">
             {rooms.map(room => (
-                <RoomCard key={room.id} {...room} />
+                <RoomCard 
+                    key={room.id} 
+                    {...room} 
+                    onSelect={handleRoomSelect} 
+                    isSelected={selectedRoomId === room.id}
+                    isAnyRoomSelected={selectedRoomId !== null}
+                />
             ))}
         </div>
     );
