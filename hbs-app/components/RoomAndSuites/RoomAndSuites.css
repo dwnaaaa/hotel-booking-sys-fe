@@ -13,6 +13,7 @@
   }
   
   .room-card {
+    position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -21,6 +22,18 @@
     overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
     background-color: white;
+  }
+
+  .room-price {
+    position: absolute;
+    top: 75px;
+    right: 100px;
+    color: #d89300;
+    padding: 8px 15px;
+    font-size: 1.6em;
+    font-family: 'MADEOuterSansThin', sans-serif;
+    font-weight: 600;
+    z-index: 10; /* Ensures the price is above other elements */
   }
   
   .room-image-container {
@@ -43,8 +56,45 @@
     padding: 15px;
     text-align: left; /* Ensures content is left-aligned */
     padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    
   }
   
+  .room-details small {
+    font-size: 0.7rem;
+    color: #666;
+    display: block;
+    margin-top: 4px;
+    font-weight: 800;
+    line-height: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+  }
+  
+
+  .guest-capacity {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  .guest-capacity svg {
+    /* Style or size your SVG icon */
+    margin-right: 5px;
+  }
+
+  .guest-capacity span {
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+
   .room-description {
     font-size: 1rem; /* Adjust font size as needed */
     margin-bottom: 10px; /* Space between description and services list */
@@ -68,6 +118,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    padding-right: 40px;
 }
 
 .room-services li {

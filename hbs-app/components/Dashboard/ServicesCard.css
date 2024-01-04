@@ -1,0 +1,69 @@
+/* ServicesCard.css */
+
+.service-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease;
+    flex: 1 1 18%;
+    box-sizing: border-box;
+    max-width: 180px;
+    min-width: 140px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5px;
+    transition: border-width 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card h5{
+    font-size: 1rem;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  .service-card:hover  {
+    border-color: #c07c00;
+  }
+
+  .service-card.selected{
+    border-color: #d89300;
+    box-shadow: 0 0 5px rgba(216, 147, 0, .8);
+  }
+  
+  .service-card img {
+    max-width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .service-card img[src$=".svg"] {
+    opacity: 0.5;
+  }
+  
+
+  
+  .service-card label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .service-card input[type="number"] {
+    width: 15%;
+    padding: 5px;
+    margin-top: 9px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  .service-card input[type="number"]::-webkit-inner-spin-button,
+.service-card input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

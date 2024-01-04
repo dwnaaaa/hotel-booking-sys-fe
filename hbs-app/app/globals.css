@@ -33,6 +33,14 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'MADEOuterSansRegular';
+  src: url('/fonts/MADE Outer Sans Regular PERSONAL USE.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 

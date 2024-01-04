@@ -5,10 +5,10 @@ import Layout from '../Layout/Layout';
 import Card from './Card';
 import './Dashboard.css';
 import BookingCard from './BookingCard';
-import HousekeepingPopup from './HousekeepingPopup'; // Import this component
-import BookingDetailsPopup from './BookingDetailsPopup';
-import KitchenPopup from './KitchenPopup';
-import ConciergePopup from './ConciergePopup';
+import HousekeepingPopup from './HousekeepingPopup/HousekeepingPopup';
+import BookingDetailsPopup from './BookingDetailsPopup/BookingDetailsPopup';
+import KitchenPopup from './KitchenPopup/KitchenPopup';
+import ConciergePopup from './ConciergePopup/ConciergePopup';
 
 
 const FrontDesk = () => {
@@ -34,21 +34,42 @@ const FrontDesk = () => {
     setSelectedBooking(null);
   };
 
+  const formatDateTime = (dateString) => {
+    const options = { 
+      year: 'numeric', month: '2-digit', day: '2-digit', 
+      hour: 'numeric', minute: 'numeric', hour12: true 
+    };
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', options);
+  };
+  
+  
   const confirmedBookings = [
     {
+      primaryGuestName: "Francesca Maries Buguis",
       bookingRef: "AXH57Z",
       checkInTime: "2024-01-05 14:00",
+      checkOutTime: "2024-01-010 14:00",
       roomType: "Deluxe Suite",
       roomQuantity: 2
     },
     {
       bookingRef: "BKH34M",
+      primaryGuestName: "Francesca Maries Buguis",
       checkInTime: "2024-01-06 15:00",
+      checkOutTime: "2024-01-010 14:00",
       roomType: "Single Room",
       roomQuantity: 1
     },
-    // ... Add more bookings as needed
   ];
+
+  const otherGuests = [
+    { id: 1, name: 'John Doe' },
+    { id: 2, name: 'Jane Smith' },
+    { id: 3, name: 'Emily Johnson' },
+    // ... more guests
+  ];
+  
 
   const getRoomType = (roomNumber) => {
     if (roomNumber >= 1 && roomNumber <= 5) {
@@ -137,18 +158,22 @@ const FrontDesk = () => {
         </div>
 
         {selectedBooking && selectedBooking.type === 'frontdesk' && (
-          <BookingDetailsPopup
-            bookingRef={selectedBooking.bookingRef}
-            checkInTime={selectedBooking.checkInTime}
-            roomType={selectedBooking.roomType}
-            roomQuantity={selectedBooking.roomQuantity}
-            onClose={closePopup}
-          />
+          <BookingDetailsPopup 
+          bookingRef={selectedBooking.bookingRef}
+          checkInTime={formatDateTime(selectedBooking.checkInTime)}
+          checkOutTime={formatDateTime(selectedBooking.checkOutTime)}
+          roomType={selectedBooking.roomType}
+          roomQuantity={selectedBooking.roomQuantity}
+          primaryGuestName={selectedBooking.primaryGuestName}
+          otherGuests={otherGuests} // Assuming this is a general list for all bookings
+          onClose={closePopup}
+        />
         )}
 
         {selectedBooking && selectedBooking.type === 'housekeeping' && (
           <HousekeepingPopup
             bookingRef={selectedBooking.bookingRef}
+            roomType={selectedBooking.roomType}
             onClose={closePopup}
           />
         )}
@@ -156,6 +181,7 @@ const FrontDesk = () => {
         {selectedBooking && selectedBooking.type === 'kitchen' && (
           <KitchenPopup
             bookingRef={selectedBooking.bookingRef}
+            roomType={selectedBooking.roomType}
             onClose={closePopup}
           />
         )}
