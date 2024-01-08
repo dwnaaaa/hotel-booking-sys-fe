@@ -4,7 +4,10 @@ import './ConfirmationComponent.css';
 const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails }) => {
 
     const bookingDetails = {
-        roomType: onBookingDetails.roomType,
+        // bookingDate: onBookingDetails.booking_date,
+        // checkInDate: onBookingDetails.
+        roomType: onBookingDetails.selectedRoomInfo.title,
+        roomQuantity: onBookingDetails.selectedRoomInfo.roomQuantity,
         numberOfGuests: onBookingDetails.guestCount,
         guests: [
             {
@@ -16,14 +19,58 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
         ]
     };
 
+    //Pass information to backend
+    const handleConfirmBooking = async () => {
+        console.log(onBookingDetails)
+        console.log(guestDetails)
+        await addGuestDetails();
+        // await addBookingDetails();
+    };
+
+    const addGuestDetails = async () => {
+        try {
+            const formattedGuestData = bookingDetails.guests.map(guest => ({
+                guest_id: guest.guestID,
+                first_name: guest.firstName,
+                middle_name: guest.middleName,
+                last_name: guest.lastName,
+                birthday: guest.birthday,
+                street: guest.street,
+                city: guest.city,
+                state: guest.state,
+                zip_code: guest.zipCode,
+                contact_no: guest.contactNumber,
+                email_add: guest.emailAddress,
+            }));
+    
+            const response = await fetch('http://localhost:8080/hbs/guest/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formattedGuestData),
+            });
+    
+            if (response.ok) {
+                console.log('Guest details added to the database.');
+            } else {
+                console.error('Failed to add guest details to the database.');
+            }
+        } catch (error) {
+            console.error('Error adding guest details:', error);
+        }
+    };    
+    
+
     return (
         <div>
-<div className="confirmation-wrapper">
+        <div className="confirmation-wrapper">
         <div className="confirmation-container">
             <h3>Booking Confirmation</h3>
             <div className="booking-summary">
                 <h2>Room Details</h2>
                 <p><strong>Room Type:</strong> {bookingDetails.roomType}</p>
+                <p><strong>Room Numbers:</strong> {bookingDetails.roomQuantity}</p>
                 <p><strong>Number of Guests:</strong> {bookingDetails.numberOfGuests}</p>
 
                 <h2>Guest Details</h2>
@@ -49,7 +96,7 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
         </svg>
                 </button>
 
-                <button className="confirm-booking-button">
+                <button onClick={handleConfirmBooking} className="confirm-booking-button">
                     Confirm Booking
                 </button>
             </div>

@@ -9,9 +9,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 const ChooseRoomComponent = ({ onNextStep }) => {
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
-
   const [guestCount, setGuestCount] = useState(1);
+  const [selectedRoomInfo, setSelectedRoomInfo] = useState(null);
 
+  const handleRoomSelect = (roomId, roomInfo) => {
+    setSelectedRoomInfo(roomInfo);
+    console.log("Room info:", selectedRoomInfo) 
+  };
   
   return (
     <div className="parent-container">    
@@ -54,12 +58,12 @@ const ChooseRoomComponent = ({ onNextStep }) => {
 
 <div>
     <h2>Choose Your Room</h2>
-    <RoomList />
+    <RoomList onRoomSelect={handleRoomSelect} />
 </div>
 
 
 <div className="button-container single-button">
-    <button onClick={() => onNextStep({ guestCount,checkInDate,checkOutDate})} className="button next">
+    <button onClick={() => onNextStep({ guestCount,checkInDate,checkOutDate, selectedRoomInfo})} className="button next">
             <svg viewBox="0 0 24 24" class="icon">
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
             </svg>

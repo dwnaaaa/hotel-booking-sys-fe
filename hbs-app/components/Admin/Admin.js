@@ -5,7 +5,8 @@ import Dashboard from '../Dashboard/Dashboard';
 
 const Admin = () => {
   return (
-    <Layout>
+    // <Layout>
+    <div>
         <div className="admin-panel-container">
 
         <div className="supervisor-panel-container">
@@ -94,7 +95,9 @@ const Admin = () => {
     </div>
 
     <Dashboard />
-    </Layout>
+
+    </div>
+    // </Layout>
   );
 }
 

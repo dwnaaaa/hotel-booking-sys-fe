@@ -14,8 +14,7 @@ const AddBooking = () => {
     guestCount: '',
     checkInDate:'',
     checkOutDate:'',
-    roomType: '',
-    numberOfRooms:'',
+    selectedRoomInfo:{},
   });
 
   const [guestDetails, setGuestDetails] = useState({
@@ -34,15 +33,9 @@ const AddBooking = () => {
     setBookingDetails((prev) => ({ ...prev, ...details }));
   };
 
-  const handleNextStep = async (details) => {
-      updateBookingDetails(details);
-
-      setBookingDetails((updatedDetails) => {
-        return updatedDetails;
-      });
-
-      console.log('Booking Details:', bookingDetails);
-      setCurrentStep(2);
+  const handleNextStep = (details) => {
+    updateBookingDetails(details);
+    setCurrentStep(2);
   };
 
   return (
@@ -56,7 +49,6 @@ const AddBooking = () => {
           {currentStep === 1 && (
             <ChooseRoomComponent
               onNextStep={handleNextStep}
-              // onRoomSelectionChange={updateBookingDetails}
             />
           )}
 
