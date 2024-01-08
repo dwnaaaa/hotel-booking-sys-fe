@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './RoomCard.css'; // Path to your CSS file
 
-const RoomCard = ({ id, image, title, maxGuests, price, availableRooms, onSelect, isSelected, isAnyRoomSelected }) => {
+const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRooms, onSelect, isSelected, isAnyRoomSelected }) => {
 
     const GuestIcon = () => (
         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,14 +42,12 @@ const RoomCard = ({ id, image, title, maxGuests, price, availableRooms, onSelect
         cardClass += ' not-selected';
     }
 
-    
 
     return (
         <div className={cardClass}>
-            <img src={image} alt={title} className="room-image" />
+            <img src={image} alt={roomTypeName} className="room-image" />
             <div className="room-content">
-                <h3 className="room-title">{title}</h3>
-
+                <h3 className="room-title">{roomTypeName}</h3>
                 <div className="info-row">
                 <div className="guest-capacity">
                 <GuestIcon />
@@ -62,7 +60,8 @@ const RoomCard = ({ id, image, title, maxGuests, price, availableRooms, onSelect
                 <div className="room-input-container">
                 <label>No. of rooms</label>
                 <div className="room-control">
-                    <button type="button" onClick={handleDecrease} disabled={!isSelected}>-</button>
+                    {/* <button type="button" onClick={handleDecrease} disabled={!isSelected}>-</button> */}
+                    <button type="button" onClick={handleDecrease}>-</button>
                     <input 
                         type="number" 
                         value={roomQuantity} 
@@ -70,13 +69,15 @@ const RoomCard = ({ id, image, title, maxGuests, price, availableRooms, onSelect
                         placeholder="Number of rooms"
                         disabled={!isSelected}
                     />
-                    <button type="button" onClick={handleIncrease} disabled={!isSelected}>+</button>
+                    {/* <button type="button" onClick={handleIncrease} disabled={!isSelected}>+</button> */}
+                    <button type="button" onClick={handleIncrease}>+</button>
                 </div>
 
                 </div>
             </div>
             </div>
-            <button className="btn-book" onClick={() => onSelect(id)}>
+            {/* <button className="btn-book" onClick={() => onSelect(id)}> */}
+            <button className="btn-book" onClick={() => onSelect(roomType, { title, maxGuests, price, availableRooms, roomQuantity })}>
                 Select
             </button>
 
@@ -89,6 +90,7 @@ RoomCard.propTypes = {
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
+    onSelect: PropTypes.func.isRequired,    
 };
 
 export default RoomCard;

@@ -1,72 +1,81 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RoomCard from './RoomCard';
 import './RoomList.css';
+import PropTypes from 'prop-types';
 
-const RoomList = () => {
+const RoomList = ({onRoomSelect}) => {
 
-    const [selectedRoomId, setSelectedRoomId] = useState(null);
+    const [roomsDB, setRoomsDB] = useState([]);
+    const [roomsCountDB, setRoomsCountDB] = useState([]);
+    const [selectedRoomInfo, setSelectedRoomInfo] = useState(null);
 
-    const handleRoomSelect = (roomId) => {
-        if (selectedRoomId === roomId) {
-            setSelectedRoomId(null);
-        } else {
-            setSelectedRoomId(roomId);
-        }
+    useEffect(() => {
+        fetch('http://localhost:8080/hbs/room-type/all')
+            .then(response => response.json())
+            .then(data => {
+                setRoomsDB(data);
+            })
+            .catch(error => console.error('Error:', error));
+    }, []);
+
+    useEffect(() => {
+        const roomTypes = ['D', 'G', 'S', 'E'];
+
+        const fetchRoomCounts = async () => {
+            const roomDataPromises = roomTypes.map(type =>
+                fetch(`http://localhost:8080/hbs/room/count-with-type/${type}`)
+                    .then(response => response.json())
+                    .then(count => ({ type, count }))
+            );
+        
+            const roomDataArray = await Promise.all(roomDataPromises);
+            setRoomsCountDB(roomDataArray);
+        };
+
+        fetchRoomCounts();
+    }, []);
+    
+
+    const handleRoomSelect = (roomType, roomInfo) => {
+            setSelectedRoomInfo({ id: roomType, ...roomInfo });
+            onRoomSelect(roomType, roomInfo);
     };
 
-
-    const rooms = [
-        {
-            id: 1,
-            image: 'images/rooms/twin.jpg',
-            title: 'Deluxe',
-            maxGuests: 2,
-            price: '$120',
-            availableRooms: 5
- 
-        }, {
-            id: 2,
-            image: 'images/rooms/deluxe twin.jpg',
-            title: 'Grand',
-            maxGuests: 4,
-            price: '$120',
-            availableRooms: 5
- 
-        }, {
-            id: 3,
-            image: 'images/rooms/double deck.jpg',
-            title: 'Suite',
-            maxGuests: 8,
-            price: '$120',
-            availableRooms: 5
- 
-        }, {
-            id: 4,
-            image: 'images/rooms/king.jpg',
-            title: 'Executive',
-            maxGuests: 10,
-            price: '$120',
-            availableRooms: 5
- 
-        },
-        // ... other room data
+    const roomImages = [
+        'images/rooms/twin.jpg',
+        'images/rooms/deluxe twin.jpg',
+        'images/rooms/double deck.jpg',
+        'images/rooms/king.jpg',
     ];
+
+    const rooms = roomsDB.map((roomData, index) => ({
+        roomType: roomData.roomType,
+        image: roomImages[index % roomImages.length], // Cycle through the images array
+        roomTypeName: roomData.roomTypeName,
+        maxGuests: roomData.maxGuests,
+        price: roomData.price,
+        availableRooms: (roomsCountDB.find(countData => countData.type === roomData.roomType) || {}).count || 0,
+    }));
 
     return (
         <div className="room-list">
             {rooms.map(room => (
                 <RoomCard 
-                    key={room.id} 
-                    {...room} 
-                    onSelect={handleRoomSelect} 
-                    isSelected={selectedRoomId === room.id}
-                    isAnyRoomSelected={selectedRoomId !== null}
+                    key={room.roomType}
+                    {...room}
+                    onSelect={(roomType, roomInfo) => handleRoomSelect(roomType, roomInfo)}
+                    isSelected={selectedRoomInfo && selectedRoomInfo.roomType === room.roomType}
+                    isAnyRoomSelected={selectedRoomInfo !== null}
                 />
             ))}
         </div>
     );
+};
+
+RoomList.propTypes = {
+    onRoomSelect: PropTypes.func.isRequired,
 };
 
 export default RoomList;
