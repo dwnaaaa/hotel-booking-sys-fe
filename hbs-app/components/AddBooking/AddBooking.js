@@ -15,6 +15,7 @@ const AddBooking = () => {
     checkInDate:'',
     checkOutDate:'',
     selectedRoomInfo:{},
+    roomNumbers:{},
   });
 
   const handleNextStep = (details) => {
@@ -24,7 +25,6 @@ const AddBooking = () => {
       alert("Please select a room before proceeding.");
       return;
     }
-
     // Room is selected, update booking details and proceed to the next step
     updateBookingDetails(details);
     setCurrentStep(2);
