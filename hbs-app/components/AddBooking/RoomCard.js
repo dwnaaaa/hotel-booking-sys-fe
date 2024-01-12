@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './RoomCard.css';
 
-const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRooms, onSelect, isSelected, isAnyRoomSelected }) => {
+const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRooms, guestCount, onSelect, isSelected, isAnyRoomSelected }) => {
+    const isCardDisabled = availableRooms === 0 || isAnyRoomSelected || maxGuests < guestCount;
 
     const GuestIcon = () => (
         <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +67,7 @@ const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRo
                         value={roomQuantity} 
                         onChange={handleChange} 
                         placeholder="Number of rooms"
-                        disabled={!isSelected}
+                        disabled={!isSelected || isCardDisabled}
                     />
                     {/* <button type="button" onClick={handleIncrease} disabled={!isSelected}>+</button> */}
                     <button type="button" onClick={handleIncrease}>+</button>
@@ -76,7 +77,7 @@ const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRo
             </div>
             </div>
             {/* <button className="btn-book" onClick={() => onSelect(id)}> */}
-            <button className="btn-book" onClick={() => onSelect({ roomType, roomTypeName, maxGuests, price, availableRooms, roomQuantity })}>
+            <button className="btn-book" onClick={() => onSelect({ roomType, roomTypeName, maxGuests, price, availableRooms, roomQuantity })} disabled={isCardDisabled}>
                 Select
             </button>
 

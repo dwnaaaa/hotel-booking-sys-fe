@@ -5,7 +5,7 @@ import RoomCard from './RoomCard';
 import './RoomList.css';
 import PropTypes from 'prop-types';
 
-const RoomList = ({onRoomSelect}) => {
+const RoomList = ({onRoomSelect, guestCount}) => {
 
     const [roomsDB, setRoomsDB] = useState([]);
     const [roomsCountDB, setRoomsCountDB] = useState([]);
@@ -62,9 +62,11 @@ const RoomList = ({onRoomSelect}) => {
     return (
         <div className="room-list">
             {rooms.map(room => (
+                
                 <RoomCard 
                     key={room.roomType}
                     {...room}
+                    guestCount = {guestCount}
                     onSelect={(roomInfo) => handleRoomSelect(roomInfo)}
                     isSelected={selectedRoomInfo && selectedRoomInfo.roomType === room.roomType}
                     isAnyRoomSelected={selectedRoomInfo !== null}
