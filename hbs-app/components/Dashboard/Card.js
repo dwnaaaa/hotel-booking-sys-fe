@@ -5,7 +5,7 @@ import HousekeepingButton from './Buttons/HousekeepingButton';
 import KitchenButton from './Buttons/KitchenButton';
 import ConciergeButton from './Buttons/ConciergeButton';
 
-const Card = ({ title, content, status, bookingRef, checkInTime, roomType, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick }) => {
+const Card = ({ data, title, content, status, bookingRef, checkInTime, roomType, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, employeeType, supervisorType }) => {
   // Set border color based on status
   const cardStyle = {
     borderColor: status === 'occupied' ? 'red' : 'green',
@@ -14,18 +14,28 @@ const Card = ({ title, content, status, bookingRef, checkInTime, roomType, roomQ
     borderRadius: '5px',
     // Add other styles as necessary
   };
+  let employeeButton = null
+
+  if(employeeType === 'F' || (employeeType === 'S' && supervisorType === 'F')) {
+    employeeButton = <FrontDeskButton onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
+  } 
+  else if(employeeType === 'H' || (employeeType === 'S' && supervisorType === 'H')) {
+    employeeButton = <HousekeepingButton onClick={() => onHousekeepingClick({bookingRef})} label="" />
+  } 
+  else if(employeeType === 'K' || (employeeType === 'S' && supervisorType === 'K')) {
+    employeeButton = <KitchenButton onClick={() => onKitchenClick({bookingRef})} label="" />
+  }
+  else if(employeeType === 'C' || (employeeType === 'S' && supervisorType === 'C')) {
+    employeeButton = <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
+  }
+
+  console.log(employeeType)
 
   return (
     <div className="card" style={cardStyle}>
       <h3>{title}</h3>
       <p>{content}</p>
-
-      {/* <div className="buttons-container"> */}
-          <FrontDeskButton onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
-          <HousekeepingButton onClick={() => onHousekeepingClick({bookingRef})} label="" />
-          <KitchenButton onClick={() => onKitchenClick({bookingRef})} label="" />
-          <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
-      {/* </div> */}
+      {employeeButton}
     </div>
   );
 };

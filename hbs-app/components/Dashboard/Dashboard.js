@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../Layout/Layout';
 import Card from './Card';
 import './Dashboard.css';
@@ -11,8 +11,9 @@ import KitchenPopup from './KitchenPopup/KitchenPopup';
 import ConciergePopup from './ConciergePopup/ConciergePopup';
 
 
-const FrontDesk = () => {
+const Dashboard = ({supervisorType}) => {
   const [selectedBooking, setSelectedBooking] = useState(null);
+  const [rooms, setRooms] = useState([])
 
   const handleBookingClick = (booking) => {
     setSelectedBooking({ ...booking, type: 'frontdesk' });
@@ -33,6 +34,8 @@ const FrontDesk = () => {
   const closePopup = () => {
     setSelectedBooking(null);
   };
+  
+  let employeeType = localStorage.getItem('type')
 
   const formatDateTime = (dateString) => {
     const options = { 
@@ -96,9 +99,62 @@ const FrontDesk = () => {
       status: status
     };
   });
+  
+  // useEffect(() => {
+  //   const fetchRooms = async () => {
+  //     try {
+  //       const response = await fetch('http://localhost:8080/hbs/room/all', {
+  //         headers: {
+  //           'Accept': 'application/json',
+  //         },
+  //         method: "GET",
+  //       })
+  //       .then(response => {
+  //         let roomData = response.json()
+  //         .then(data => {
+  //           setRooms(roomData)
+  //           console.log(roomData)
+  //         })
+          
+  //       })
+        
+  //     } catch(e) {
+  //       console.error('Error fetching room data: ', error)
+  //     }
+  //   }
 
+  //   fetchRooms();
+    
+  // }, [])
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/hbs/room/all', {
+          headers: {
+            'Accept': 'application/json',
+          },
+          method: "GET",
+        });
   
+        if (!response.ok) {
+          throw new Error('Failed to fetch room data');
+        }
   
+        // Parse the JSON response
+        const roomData = await response.json();
+  
+        // Update the state with the fetched data
+        setRooms(roomData);
+        console.log(roomData);
+      } catch (error) {
+        console.error('Error fetching room data: ', error);
+      }
+    };
+  
+    // Call the fetchRooms function
+    fetchRooms();
+  }, []);
 
   return (
     <Layout>
@@ -134,13 +190,15 @@ const FrontDesk = () => {
                 onHousekeepingClick={() => handleHousekeepingClick(booking)}
                 onKitchenClick={() => handleKitchenClick(booking)}
                 onConciergeClick={() => handleConciergeClick(booking)}
+                employeeType={employeeType}
+                supervisorType={supervisorType}
               />
             ))}
           </div>
         </div>
 
         <div className="column column-right">
-          {cardsData.map((card, index) => (
+          {rooms.map((room, index) => (
             <Card 
             key={index} 
             title={card.title} 
@@ -153,7 +211,11 @@ const FrontDesk = () => {
             onBookingClick={() => handleBookingClick(card)}
             onHousekeepingClick={() => handleHousekeepingClick(card)}
             onKitchenClick={() => handleKitchenClick(card)}
-            onConciergeClick={() => handleConciergeClick(card)}/>
+            onConciergeClick={() => handleConciergeClick(card)}
+            employeeType={employeeType}
+            supervisorType={supervisorType}
+            data={room}
+            />
           ))}
         </div>
 
@@ -198,4 +260,4 @@ const FrontDesk = () => {
   );
 };
 
-export default FrontDesk;
+export default Dashboard;

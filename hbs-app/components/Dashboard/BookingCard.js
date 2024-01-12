@@ -12,30 +12,43 @@ import HousekeepingButton from './Buttons/HousekeepingButton';
 
 
 
-const BookingCard = ({ bookingRef, checkInTime, roomType, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, onCancelClick }) => {
+const BookingCard = ({ bookingRef, checkInTime, roomType, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, onCancelClick, employeeType, supervisorType }) => {
 
   const handleCancel = () => {
     // Implement cancel logic
     console.log("Cancel clicked");
   };
+  let employeeButton = null
+
+  if(employeeType === 'F' || (employeeType === 'S' && supervisorType === 'F')) {
+    employeeButton = <FrontDeskButton onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
+  } 
+  else if(employeeType === 'H' || (employeeType === 'S' && supervisorType === 'H')) {
+    employeeButton = <HousekeepingButton onClick={() => onHousekeepingClick({bookingRef})} label="" />
+  } 
+  else if(employeeType === 'K' || (employeeType === 'S' && supervisorType === 'K')) {
+    employeeButton = <KitchenButton onClick={() => onKitchenClick({bookingRef})} label="" />
+  }
+  else if(employeeType === 'C' || (employeeType === 'S' && supervisorType === 'C')) {
+    employeeButton = <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
+  }
 
   return (
     <div className="booking-card">
             
           <div className="buttons-container">
-            <FrontDeskButton onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
-            <HousekeepingButton onClick={() => onHousekeepingClick({bookingRef})} label="" />
-            <KitchenButton onClick={() => onKitchenClick({bookingRef})} label="" />
-            <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
-
+            {employeeButton}
             <div className="cancel-button-container">
-            <button onClick={handleCancel} className="cancel-button">
-              <svg width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M18 6L6 18M6 6l12 12"/>
-              </svg>
-            </button>
-
+              {
+                employeeType === 'S' ? 
+                <button onClick={handleCancel} className="cancel-button">
+                  <svg width="18px" height="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M18 6L6 18M6 6l12 12"/>
+                  </svg>
+                </button> : null
+              }
+              
             </div>
 
           </div>
