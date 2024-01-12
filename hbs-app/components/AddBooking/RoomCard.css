@@ -34,6 +34,21 @@
     cursor: not-allowed;
 }
 
+.btn-book:disabled,
+.btn-book.disabled {
+    background-color: #ccc; /* Use a gray color for the background */
+    color: #888; /* Use a darker gray color for the text */
+    cursor: not-allowed; /* Change the cursor to indicate that the button is not clickable */
+    pointer-events: none; /* Disable pointer events to prevent any interactivity */
+}
+
+/* Additional styles to handle hover states */
+.btn-book:hover:disabled,
+.btn-book.disabled:hover {
+    background-color: #ccc; /* Same as the disabled state for consistency */
+    color: #888; /* Same as the disabled state for consistency */
+}
+
 
 .room-image {
     width: 100%;

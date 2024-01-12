@@ -15,6 +15,7 @@ const ChooseRoomComponent = ({ onNextStep }) => {
 
   const handleRoomSelect = (roomInfo) => {
     setSelectedRoomInfo(roomInfo);
+    console.log(roomInfo.availableRooms)
   };
 
   useEffect(() => {
@@ -86,7 +87,7 @@ const ChooseRoomComponent = ({ onNextStep }) => {
 
 <div>
     <h2>Choose Your Room</h2>
-    <RoomList onRoomSelect={handleRoomSelect} />
+    <RoomList onRoomSelect={handleRoomSelect} guestCount={guestCount} />
     <p>Available Room Numbers: {roomNumbers.join(', ')}</p>
 </div>
 
