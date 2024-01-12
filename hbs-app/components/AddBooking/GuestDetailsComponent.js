@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './GuestDetailsComponent.css';
 
-
 const initialGuest = {
-  // guestID: generateGuestID(),
   firstName: '',
   middleName: '',
   lastName: '',
@@ -17,22 +15,9 @@ const initialGuest = {
 };
 
 const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, onGuestDetailsChange }) => {
-
-  const generateGuestID = () => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let guestID = '';
-    for (let i = 0; i < 6; i++) {
-      guestID += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return guestID;
-  };
   
-  const generateGuestsWithID = (guests) => {
-    return guests.map((guest) => ({ ...guest, guestID: generateGuestID() }));
-  };
-  
-  const [primaryGuest, setPrimaryGuest] = useState({ ...initialGuest, guestID: generateGuestID() });
-  const [extraGuests, setExtraGuests] = useState(generateGuestsWithID([]));
+  const [primaryGuest, setPrimaryGuest] = useState({ ...initialGuest });
+  const [extraGuests, setExtraGuests] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [guestsPerPage, setGuestsPerPage] = useState(1);
 
@@ -43,11 +28,11 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
 
   const handleExtraGuestChange = (index, event) => {
     const updatedExtraGuests = [...extraGuests];
-    updatedExtraGuests[index] = { ...updatedExtraGuests[index], [event.target.name]: event.target.value, guestID: generateGuestID() };
+    updatedExtraGuests[index] = { ...updatedExtraGuests[index], [event.target.name]: event.target.value };
     setExtraGuests(updatedExtraGuests);
     onGuestDetailsChange(primaryGuest, updatedExtraGuests);
   };
-
+  
   const renderGuestForms = () => {
     const guestForms = [];
   

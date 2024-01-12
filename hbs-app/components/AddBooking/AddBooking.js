@@ -27,6 +27,8 @@ const AddBooking = () => {
       primaryGuest,
       extraGuests
     });
+    console.log(bookingDetails)
+    console.log(guestDetails)
   };
 
   const updateBookingDetails = (details) => {
@@ -36,6 +38,8 @@ const AddBooking = () => {
   const handleNextStep = (details) => {
     updateBookingDetails(details);
     setCurrentStep(2);
+    console.log(bookingDetails)
+    console.log(guestDetails)
   };
 
   return (

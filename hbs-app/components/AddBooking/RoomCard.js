@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import './RoomCard.css'; // Path to your CSS file
+import './RoomCard.css';
 
 const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRooms, onSelect, isSelected, isAnyRoomSelected }) => {
 
@@ -33,7 +33,6 @@ const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRo
     };
 
     
-
     let cardClass = 'room-card';
 
     if (isSelected) {
@@ -77,7 +76,7 @@ const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRo
             </div>
             </div>
             {/* <button className="btn-book" onClick={() => onSelect(id)}> */}
-            <button className="btn-book" onClick={() => onSelect(roomType, { title, maxGuests, price, availableRooms, roomQuantity })}>
+            <button className="btn-book" onClick={() => onSelect({ roomType, roomTypeName, maxGuests, price, availableRooms, roomQuantity })}>
                 Select
             </button>
 
@@ -88,7 +87,7 @@ const RoomCard = ({ roomType, image, roomTypeName, maxGuests, price, availableRo
 
 RoomCard.propTypes = {
     image: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    roomTypeName: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     onSelect: PropTypes.func.isRequired,    
 };

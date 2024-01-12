@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import DatePicker from 'react-datepicker';
 import RoomList from './RoomList';
 import './ChooseRoomComponent.css';
@@ -10,11 +10,55 @@ const ChooseRoomComponent = ({ onNextStep }) => {
   const [checkInDate, setCheckInDate] = useState(new Date());
   const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [guestCount, setGuestCount] = useState(1);
+  const [roomNumbers, setRoomNumbers] = useState([]); // Initialize as an empty array
   const [selectedRoomInfo, setSelectedRoomInfo] = useState(null);
 
-  const handleRoomSelect = (roomId, roomInfo) => {
+  // const handleRoomSelect = (roomInfo) => {
+  //   setSelectedRoomInfo(roomInfo);
+  // };
+
+  useEffect(() => {
+    console.log("Room info:", selectedRoomInfo);
+  }, [selectedRoomInfo]);
+
+  // backend connection
+  const handleRoomSelect = (roomInfo) => {
     setSelectedRoomInfo(roomInfo);
-    console.log("Room info:", selectedRoomInfo) 
+  };
+
+  useEffect(() => {
+    if (selectedRoomInfo) {
+      fetchRoomNumbers(selectedRoomInfo);
+    }
+  }, [selectedRoomInfo]);
+
+  const fetchRoomNumbers = async (selectedRoomInfo) => {
+    try {
+      const response = await fetch('http://localhost:8080/hbs/room/all', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          roomType: selectedRoomInfo.roomType,
+          roomQuantity: selectedRoomInfo.roomQuantity,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Ensure data.roomNumbers is an array before updating state
+        if (Array.isArray(data.roomNumbers)) {
+          setRoomNumbers(data.roomNumbers);
+        } else {
+          console.error('Invalid room numbers data:', data.roomNumbers);
+        }
+      } else {
+        console.error('Failed to fetch room numbers');
+      }
+    } catch (error) {
+      console.error('Error fetching room numbers:', error);
+    }
   };
   
   return (
@@ -59,6 +103,7 @@ const ChooseRoomComponent = ({ onNextStep }) => {
 <div>
     <h2>Choose Your Room</h2>
     <RoomList onRoomSelect={handleRoomSelect} />
+    <p>Available Room Numbers: {roomNumbers.join(', ')}</p>
 </div>
 
 

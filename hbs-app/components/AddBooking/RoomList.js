@@ -38,10 +38,10 @@ const RoomList = ({onRoomSelect}) => {
     }, []);
     
 
-    const handleRoomSelect = (roomType, roomInfo) => {
-            setSelectedRoomInfo({ id: roomType, ...roomInfo });
-            onRoomSelect(roomType, roomInfo);
-    };
+    const handleRoomSelect = (roomInfo) => {
+        setSelectedRoomInfo({ ...roomInfo });
+        onRoomSelect(roomInfo);
+    };    
 
     const roomImages = [
         'images/rooms/twin.jpg',
@@ -65,7 +65,7 @@ const RoomList = ({onRoomSelect}) => {
                 <RoomCard 
                     key={room.roomType}
                     {...room}
-                    onSelect={(roomType, roomInfo) => handleRoomSelect(roomType, roomInfo)}
+                    onSelect={(roomInfo) => handleRoomSelect(roomInfo)}
                     isSelected={selectedRoomInfo && selectedRoomInfo.roomType === room.roomType}
                     isAnyRoomSelected={selectedRoomInfo !== null}
                 />
