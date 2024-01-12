@@ -13,51 +13,35 @@ const ChooseRoomComponent = ({ onNextStep }) => {
   const [roomNumbers, setRoomNumbers] = useState([]); // Initialize as an empty array
   const [selectedRoomInfo, setSelectedRoomInfo] = useState(null);
 
-  // const handleRoomSelect = (roomInfo) => {
-  //   setSelectedRoomInfo(roomInfo);
-  // };
-
-  useEffect(() => {
-    console.log("Room info:", selectedRoomInfo);
-  }, [selectedRoomInfo]);
-
-  // backend connection
   const handleRoomSelect = (roomInfo) => {
     setSelectedRoomInfo(roomInfo);
   };
 
   useEffect(() => {
     if (selectedRoomInfo) {
+      console.log("Room info:", selectedRoomInfo);
       fetchRoomNumbers(selectedRoomInfo);
     }
   }, [selectedRoomInfo]);
 
   const fetchRoomNumbers = async (selectedRoomInfo) => {
     try {
-      const response = await fetch('http://localhost:8080/hbs/room/all', {
-        method: 'POST',
+      const response = await fetch(`http://localhost:8080/hbs/room/available-rooms-by-type/${selectedRoomInfo.roomType}`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          roomType: selectedRoomInfo.roomType,
-          roomQuantity: selectedRoomInfo.roomQuantity,
-        }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Ensure data.roomNumbers is an array before updating state
-        if (Array.isArray(data.roomNumbers)) {
-          setRoomNumbers(data.roomNumbers);
-        } else {
-          console.error('Invalid room numbers data:', data.roomNumbers);
-        }
+        // setRoomNumbers(data);
+        setRoomNumbers(data.slice(0, selectedRoomInfo.roomQuantity));
       } else {
-        console.error('Failed to fetch room numbers');
+        console.error(`Failed to fetch room numbers. Status: ${response.status}`);
       }
     } catch (error) {
-      console.error('Error fetching room numbers:', error);
+      console.error('Error fetching room numbers:', error.message);
     }
   };
   
@@ -108,7 +92,7 @@ const ChooseRoomComponent = ({ onNextStep }) => {
 
 
 <div className="button-container single-button">
-    <button onClick={() => onNextStep({ guestCount,checkInDate,checkOutDate, selectedRoomInfo})} className="button next">
+    <button onClick={() => onNextStep({ guestCount,checkInDate,checkOutDate, selectedRoomInfo, roomNumbers})} className="button next">
             <svg viewBox="0 0 24 24" class="icon">
                 <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
             </svg>

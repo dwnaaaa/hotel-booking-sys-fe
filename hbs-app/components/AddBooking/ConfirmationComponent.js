@@ -15,6 +15,7 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
         roomTypeName: onBookingDetails.selectedRoomInfo.roomTypeName,
         roomQuantity: onBookingDetails.selectedRoomInfo.roomQuantity,
         numberOfGuests: onBookingDetails.guestCount,
+        roomNumbers: onBookingDetails.roomNumbers,
         guests: [
             {
                 ...guestDetails.primaryGuest,
@@ -174,7 +175,7 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
                 <p><strong>Check In Date:</strong> {bookingDetails.checkInDate}</p>
                 <p><strong>Check Out Date:</strong> {bookingDetails.checkOutDate}</p>
                 <p><strong>Room Type:</strong> {bookingDetails.roomTypeName}</p>
-                <p><strong>Room Numbers:</strong> {bookingDetails.roomQuantity}</p>
+                <p><strong>Room Numbers:</strong> {bookingDetails.roomNumbers.join(',')}</p>
                 <p><strong>Number of Guests:</strong> {bookingDetails.numberOfGuests}</p>
 
                 <h2>Guest Details</h2>
