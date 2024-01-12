@@ -17,6 +17,19 @@ const AddBooking = () => {
     selectedRoomInfo:{},
   });
 
+  const handleNextStep = (details) => {
+    // Check if a room is selected
+    if (!details.selectedRoomInfo || Object.keys(details.selectedRoomInfo).length === 0) {
+      // Room not selected, show an alert or perform any other validation logic
+      alert("Please select a room before proceeding.");
+      return;
+    }
+
+    // Room is selected, update booking details and proceed to the next step
+    updateBookingDetails(details);
+    setCurrentStep(2);
+  };
+
   const [guestDetails, setGuestDetails] = useState({
     primaryGuest: {},
     extraGuests: []
@@ -33,13 +46,6 @@ const AddBooking = () => {
 
   const updateBookingDetails = (details) => {
     setBookingDetails((prev) => ({ ...prev, ...details }));
-  };
-
-  const handleNextStep = (details) => {
-    updateBookingDetails(details);
-    setCurrentStep(2);
-    console.log(bookingDetails)
-    console.log(guestDetails)
   };
 
   return (
