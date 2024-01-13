@@ -40,7 +40,7 @@ const RoomAndSuites = () => {
           <div className="room-card">
 
           <div className="room-price">
-                <span>&#8369;120 / night</span>
+                <span>&#8369;5000 / night</span>
               </div>
 
           <div className="room-image-container">
@@ -80,7 +80,7 @@ const RoomAndSuites = () => {
       <div className="room-card">
 
         <div className="room-price">
-            <span>&#8369;120 / night</span>
+            <span>&#8369;7000 / night</span>
             </div>
 
         <div className="room-image-container">
@@ -92,7 +92,7 @@ const RoomAndSuites = () => {
             <div className="info-row">
             <div className="guest-capacity">
             <GuestIcon />
-            <span>4 guests</span>
+            <span>2 guests</span>
             </div>
 
             <div className="guest-capacity">
@@ -108,10 +108,10 @@ const RoomAndSuites = () => {
 
             <p className="room-description">Elevate your experience in our Grand Room, boasting extra space and luxury. With two large beds, sophisticated decor, and a range of premium amenities, it's an ideal choice for those seeking comfort with a touch of elegance.</p>
             <ul className="room-services">
-                <li>Complimentary Wi-Fi</li>
-                <li>Daily Housekeeping</li>
-                <li>Room Service</li>
-                <li>Laundry Service</li>
+                    <li>Reservations</li>
+                    <li>Catering Services</li>
+                    <li>Event Planning</li>
+                    <li>Language Assistance</li>
             </ul>
 
         </div>
@@ -120,7 +120,7 @@ const RoomAndSuites = () => {
         <div className="room-card">
 
         <div className="room-price">
-            <span>&#8369;120 / night</span>
+            <span>&#8369;10000 / night</span>
             </div>
 
         <div className="room-image-container">
@@ -132,7 +132,7 @@ const RoomAndSuites = () => {
             <div className="info-row">
             <div className="guest-capacity">
             <GuestIcon />
-            <span>6 guests</span>
+            <span>4 guests</span>
             </div>
 
             <div className="guest-capacity">
@@ -149,10 +149,10 @@ const RoomAndSuites = () => {
 
             <p className="room-description">Our Suite Room offers a fun and unique stay, especially for younger guests or friends. Featuring bunk beds, a vibrant decor, and all essential comforts, it's perfect for adventurous spirits looking for an unconventional lodging experience.</p>
             <ul className="room-services">
-                <li>Complimentary Wi-Fi</li>
-                <li>Daily Housekeeping</li>
-                <li>Room Service</li>
-                <li>Laundry Service</li>
+                <li>Language Assistance </li>
+                <li>Shopping Assistance</li>
+                <li>Customized Meal Plans</li>
+                <li>Spa and Wellness Appointments</li>
             </ul>
 
         </div>
@@ -161,7 +161,7 @@ const RoomAndSuites = () => {
         <div className="room-card">
 
             <div className="room-price">
-                <span>&#8369;120 / night</span>
+                <span>&#8369;15000 / night</span>
                 </div>
 
             <div className="room-image-container">
@@ -173,7 +173,7 @@ const RoomAndSuites = () => {
                 <div className="info-row">
                 <div className="guest-capacity">
                 <GuestIcon />
-                <span>8 guests</span>
+                <span>4 guests</span>
                 </div>
 
                 <div className="guest-capacity">
@@ -190,10 +190,10 @@ const RoomAndSuites = () => {
 
                 <p className="room-description">Indulge in the ultimate luxury in our Executive Room, where elegance meets comfort. The room features a plush king-sized bed, opulent furnishings, and state-of-the-art amenities, making it perfect for couples or anyone desiring a lavish stay.</p>
                 <ul className="room-services">
-                    <li>Complimentary Wi-Fi</li>
-                    <li>Daily Housekeeping</li>
-                    <li>Room Service</li>
-                    <li>Laundry Service</li>
+                    <li>Personal Chef Services</li>
+                    <li>Customized Meal Plans</li>
+                    <li>Spa and Wellness Appointments (free)</li>
+                    <li>Interactive Culinary Experiences</li>
                 </ul>
 
             </div>
