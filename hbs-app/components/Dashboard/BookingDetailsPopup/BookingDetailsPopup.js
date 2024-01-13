@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './BookingDetailsPopup.css';
 import '../PopupGlobal.css';
 
@@ -21,6 +21,17 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
     onClose(); 
   };
 
+  useEffect(() => {
+    const fetchBooking = async () => {
+      console.log(bookingRef)
+      const response = await fetch(`http://localhost:8080/hbs/booking/${bookingRef}`)
+      // const bookingData = await response.json()
+
+    }
+
+    fetchBooking()
+  },[])
+
   return (
     <div className="popup-container">
       <div className="popup-backdrop" onClick={onClose}></div>
@@ -35,8 +46,8 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
         
         
         <div className="overall-content">
-        <h2>{bookingRef}</h2>
-        <h4>{roomType}</h4>
+        {/* <h2>{bookingData.brn}</h2> */}
+        {/* <h4>{bookingData.roomType}</h4> */}
 
         <hr></hr>
 
@@ -47,22 +58,22 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
             <div className="left-column">
               <div className="checkin-checkout">
                 <div className="checkin">
-                  <p>{checkInTime}</p>
+                  {/* <p>{bookingData.checkInDate}</p> */}
                   <small>Check In</small>
                 </div>
                 <div className="checkout">
-                  <p>{checkOutTime}</p>
+                  {/* <p>{bookingData.checkOutDate}</p> */}
                   <small>Check Out</small>
                 </div>
               </div>
               <div className="rooms-booked">
-                <p>Room {roomQuantity}</p>
+                {/* <p>Room {bookingData.noOfRooms}</p> */}
                 <small>Rooms Booked</small>
               </div>
             </div>
 
             <div className="right-column">
-              <p>{primaryGuestName}</p>
+              {/* <p>{bookingData.primaryGuestId}</p> */}
               <small>Primary Guest</small>
               <div className="other-guests">
               {otherGuests ? 

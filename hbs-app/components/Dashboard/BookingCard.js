@@ -12,8 +12,7 @@ import HousekeepingButton from './Buttons/HousekeepingButton';
 
 
 
-const BookingCard = ({ bookingRef, checkInTime, roomType, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, onCancelClick, employeeType, supervisorType }) => {
-
+const BookingCard = ({ booking, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, onCancelClick, employeeType, supervisorType }) => {
   const handleCancel = () => {
     // Implement cancel logic
     console.log("Cancel clicked");
@@ -21,17 +20,44 @@ const BookingCard = ({ bookingRef, checkInTime, roomType, roomQuantity, onBookin
   let employeeButton = null
 
   if(employeeType === 'F' || (employeeType === 'S' && supervisorType === 'F')) {
-    employeeButton = <FrontDeskButton onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
+    employeeButton = <FrontDeskButton onClick={() => onBookingClick(booking)} label="" />
   } 
   else if(employeeType === 'H' || (employeeType === 'S' && supervisorType === 'H')) {
-    employeeButton = <HousekeepingButton onClick={() => onHousekeepingClick({bookingRef})} label="" />
+    employeeButton = <HousekeepingButton onClick={() => onHousekeepingClick({booking})} label="" />
   } 
   else if(employeeType === 'K' || (employeeType === 'S' && supervisorType === 'K')) {
-    employeeButton = <KitchenButton onClick={() => onKitchenClick({bookingRef})} label="" />
+    employeeButton = <KitchenButton onClick={() => onKitchenClick({booking})} label="" />
   }
   else if(employeeType === 'C' || (employeeType === 'S' && supervisorType === 'C')) {
-    employeeButton = <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
+    employeeButton = <ConciergeButton onClick={() => onConciergeClick({booking})} label="" />
   }
+
+
+const dateTime = new Date(booking.checkInDate);
+// Format the date and time
+console.log(booking.checkInTime)
+const options = { 
+  year: 'numeric', 
+  month: 'long', 
+  day: 'numeric', 
+};
+const formattedDateTime = dateTime.toLocaleString('en-US', options);
+
+let roomType = null
+switch(booking.roomType) {
+  case 'D':
+    roomType = 'Deluxe'
+    break
+  case 'G':
+    roomType = 'Grand'
+    break
+  case 'S':
+    roomType = 'Suite'
+    break
+  case 'E':
+    roomType = 'Executive'
+    break
+}
 
   return (
     <div className="booking-card">
@@ -53,14 +79,12 @@ const BookingCard = ({ bookingRef, checkInTime, roomType, roomQuantity, onBookin
 
           </div>
 
-      <h4>{bookingRef}</h4>
-      <p><strong>Check-In:</strong> {checkInTime}</p>
+      <h4>{booking.brn}</h4>
+      <p><strong>Check-In:</strong> {formattedDateTime}</p>
       <div className="room-details">
         <p><strong>Room Type:</strong> {roomType}</p>
-        <p><strong>Booked:</strong> {roomQuantity}</p>
+        <p><strong>Booked:</strong> {booking.noOfRooms} rooms</p>
       </div> 
-
-
 
     </div>
   );

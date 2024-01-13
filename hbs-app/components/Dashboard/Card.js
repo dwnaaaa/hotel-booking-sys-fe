@@ -7,10 +7,10 @@ import HousekeepingButton from './Buttons/HousekeepingButton';
 import KitchenButton from './Buttons/KitchenButton';
 import ConciergeButton from './Buttons/ConciergeButton';
 
-const Card = ({ data, title, content, status, bookingRef, checkInTime, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, employeeType, supervisorType }) => {
+const Card = ({ data, bookingRef, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, employeeType, supervisorType }) => {
   // Set border color based on status
   const cardStyle = {
-    borderColor: status === 'occupied' ? 'red' : 'green',
+    borderColor: data.bookedBrn === "VACANT" ? 'green' : 'red',
     borderWidth: '1px',
     borderStyle: 'solid',
     borderRadius: '5px',
@@ -19,16 +19,16 @@ const Card = ({ data, title, content, status, bookingRef, checkInTime, roomQuant
   let employeeButton = null
 
   if(employeeType === 'F' || (employeeType === 'S' && supervisorType === 'F')) {
-    employeeButton = <FrontDeskButton onClick={() => onBookingClick({ bookingRef, checkInTime, roomType, roomQuantity})} label="" />
+    employeeButton = <FrontDeskButton onClick={() => onBookingClick(data)} label="" />
   } 
   else if(employeeType === 'H' || (employeeType === 'S' && supervisorType === 'H')) {
-    employeeButton = <HousekeepingButton onClick={() => onHousekeepingClick({bookingRef})} label="" />
+    employeeButton = <HousekeepingButton onClick={() => onHousekeepingClick(data.bookedBrn)} label="" />
   } 
   else if(employeeType === 'K' || (employeeType === 'S' && supervisorType === 'K')) {
-    employeeButton = <KitchenButton onClick={() => onKitchenClick({bookingRef})} label="" />
+    employeeButton = <KitchenButton onClick={() => onKitchenClick(data.bookedBrn)} label="" />
   }
   else if(employeeType === 'C' || (employeeType === 'S' && supervisorType === 'C')) {
-    employeeButton = <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
+    employeeButton = <ConciergeButton onClick={() => onConciergeClick(data.bookedBrn)} label="" />
   }
 
   const [roomType, setRoomType] = useState('')
