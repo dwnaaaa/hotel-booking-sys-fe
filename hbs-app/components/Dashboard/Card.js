@@ -1,11 +1,13 @@
-import React from 'react';
+'use client'
+
+import React, { useEffect, useState } from 'react';
 import './Card.css';
 import FrontDeskButton from './Buttons/FrontDeskButton';
 import HousekeepingButton from './Buttons/HousekeepingButton';
 import KitchenButton from './Buttons/KitchenButton';
 import ConciergeButton from './Buttons/ConciergeButton';
 
-const Card = ({ data, title, content, status, bookingRef, checkInTime, roomType, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, employeeType, supervisorType }) => {
+const Card = ({ data, title, content, status, bookingRef, checkInTime, roomQuantity, onBookingClick, onHousekeepingClick, onKitchenClick, onConciergeClick, employeeType, supervisorType }) => {
   // Set border color based on status
   const cardStyle = {
     borderColor: status === 'occupied' ? 'red' : 'green',
@@ -29,12 +31,34 @@ const Card = ({ data, title, content, status, bookingRef, checkInTime, roomType,
     employeeButton = <ConciergeButton onClick={() => onConciergeClick({bookingRef})} label="" />
   }
 
-  console.log(employeeType)
+  const [roomType, setRoomType] = useState('')
+
+  
+
+  useEffect(() => {
+    switch(data.roomType) {
+      case 'D':
+        setRoomType('Deluxe')
+        break
+      case 'G':
+        setRoomType('Grand')
+        break
+      case 'S':
+        setRoomType('Suite')
+        break
+      case 'E':
+        setRoomType('Executive')
+        break
+      case 'S':
+        setRoomType('Suite')
+        break
+    }
+  }, [])
 
   return (
     <div className="card" style={cardStyle}>
-      <h3>{title}</h3>
-      <p>{content}</p>
+      <h3>Room {data.roomNumber}</h3>
+      <p>{roomType}</p>
       {employeeButton}
     </div>
   );
