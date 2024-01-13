@@ -41,6 +41,7 @@ const LoginPage = () => {
             response.json().then(type => {
               localStorage.setItem('jwt', jwt)
               localStorage.setItem('type', type)
+              localStorage.setItem('isLoggedIn', true)
             })
           })
         })
