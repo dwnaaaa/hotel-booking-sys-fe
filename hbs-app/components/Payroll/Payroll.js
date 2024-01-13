@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../Layout/Layout';
 import './Payroll.css';
 import Button from '../Dashboard/Buttons/Button';
@@ -30,20 +30,47 @@ const Payroll = () => {
     }));
   };
 
-  const handleSaveChanges = () => {
-    // Handle saving changes to the state or server
-    // You can use the editedSalaries state to update the actual state or perform other actions
-    console.log("Saving changes:", editedSalaries);
-    setEditMode(false);
-    setEditableIndex(null);
-  };
+  // const handleSaveChanges = () => {
+  //   // Handle saving changes to the state or server
+  //   // You can use the editedSalaries state to update the actual state or perform other actions
+  //   console.log("Saving changes:", editedSalaries);
+  //   setEditMode(false);
+  //   setEditableIndex(null);
+  // };
 
-  // Example data, replace with real data
-  const payrollData = [
-    { number: "001", name: "John Doe", type: "Front Desk", salary: "3000", icon: <Button onClick={() => handleEditClick(0)} /> },
-    { number: "002", name: "Jane Smith", type: "Housekeeping", salary: "1500", icon: <Button onClick={() => handleEditClick(1)} /> },
-    // Add more payroll data here
-  ];
+  const [payrollData, setPayrollData] = useState([]);
+
+  useEffect(() => {
+    const endpoint = "http://localhost:8080/hbs/employee/all";
+
+    // Make a GET request to the endpoint
+    fetch(endpoint)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Assuming the response is in JSON format
+      })
+      .then(data => {
+        // Process the received data and update your payrollData array
+        const updatedPayrollData = data.map((employee, index) => ({
+          number: employee.employeeId,
+          name: `${employee.firstName} ${employee.middleName} ${employee.lastName}`,
+          type: employee.employeeType.employeeType,
+          salary: employee.salary,
+          icon: <Button onClick={() => handleEditClick(index)} />
+        }));
+
+        // Set the updated data in the component state
+        setPayrollData(updatedPayrollData);
+        console.log(updatedPayrollData);
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
+
 
   const totalSalary = payrollData.reduce((acc, employee, index) => {
     const editedSalary = editedSalaries[index];
@@ -104,7 +131,7 @@ const Payroll = () => {
             </div>
 
                 <div className="submit-button-container">
-                <button className="submit-button">
+                <button className="submit-button" onClick={handleSaveChanges}>
                     Submit payroll
 
                     <svg className="right-arrow-icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
