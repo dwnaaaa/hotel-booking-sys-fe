@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './GuestDetailsComponent.css';
 
 const initialGuest = {
@@ -15,23 +15,50 @@ const initialGuest = {
 };
 
 const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, onGuestDetailsChange }) => {
+
+  const formRef = useRef(null);
   
   const [primaryGuest, setPrimaryGuest] = useState({ ...initialGuest });
   const [extraGuests, setExtraGuests] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [guestsPerPage, setGuestsPerPage] = useState(1);
+  
+const handleSubmit = (e) => {
+  if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday || !primaryGuest.contactNumber || !primaryGuest.emailAddress || !primaryGuest.street || !primaryGuest.city || !primaryGuest.state || !primaryGuest.zipCode) {
+    e.preventDefault(); 
+    alert('Please fill in all required fields for the primary guest.');
+    return;
+  }
+
+  if (onBookingDetails.guestCount > 1 && (extraGuests.length === 0 || extraGuests.some(guest => !guest.firstName || !guest.middleName || !guest.lastName || !guest.birthday))) {
+    e.preventDefault(); 
+    alert('Please fill in all required fields for extra guests.');
+    return;
+  }
+
+  onNextStep();
+};
+
+  
 
   const handlePrimaryGuestChange = (event) => {
-    setPrimaryGuest({ ...primaryGuest, [event.target.name]: event.target.value });
-    onGuestDetailsChange({ ...primaryGuest, [event.target.name]: event.target.value }, extraGuests);
+    setPrimaryGuest((prevPrimaryGuest) => {
+      const updatedPrimaryGuest = { ...prevPrimaryGuest, [event.target.name]: event.target.value };
+      onGuestDetailsChange(updatedPrimaryGuest, extraGuests);
+      return updatedPrimaryGuest;
+    });
   };
+  
 
   const handleExtraGuestChange = (index, event) => {
-    const updatedExtraGuests = [...extraGuests];
-    updatedExtraGuests[index] = { ...updatedExtraGuests[index], [event.target.name]: event.target.value };
-    setExtraGuests(updatedExtraGuests);
-    onGuestDetailsChange(primaryGuest, updatedExtraGuests);
+    setExtraGuests((prevExtraGuests) => {
+      const updatedExtraGuests = [...prevExtraGuests];
+      updatedExtraGuests[index] = { ...updatedExtraGuests[index], [event.target.name]: event.target.value };
+      onGuestDetailsChange(primaryGuest, updatedExtraGuests);
+      return updatedExtraGuests;
+    });
   };
+  
   
   const renderGuestForms = () => {
     const guestForms = [];
@@ -47,37 +74,42 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
   };
   
   const renderGuestForm = (guest, index, isPrimary = false) => (
-    <div key={isPrimary ? 'primary' : index} className="guest-form">
+    <form key={isPrimary ? 'primary' : index} className="guest-form">
       <h2>{isPrimary ? 'Primary Guest' : `Extra Guest ${index + 1}`}</h2>
 
       <div>
         <label>Contact Information</label>
-      <div className="inline-fields">
-      <input
-        className="guest-details-input"
-        type="text"
-        name="firstName"
-        placeholder="First Name"
-        value={guest.firstName}
-        onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
-      />
-      <input
-        className="guest-details-input"
-        type="text"
-        name="middleName"
-        placeholder="Middle Name"
-        value={guest.middleName}
-        onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
-      />
-      <input
-        className="guest-details-input"
-        type="text"
-        name="lastName"
-        placeholder="Last Name"
-        value={guest.lastName}
-        onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
-      />
-    </div>
+        <div className="inline-fields">
+        <input
+  className="guest-details-input"
+  type="text"
+  name="firstName"
+  placeholder="First Name"
+  value={guest.firstName}
+  onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
+  required
+/>
+
+<input
+  className="guest-details-input"
+  type="text"
+  name="middleName"
+  placeholder="Middle Name"
+  value={guest.middleName}
+  onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
+  required
+/>
+
+<input
+  className="guest-details-input"
+  type="text"
+  name="lastName"
+  placeholder="Last Name"
+  value={guest.lastName}
+  onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
+/>
+</div>
+    
       </div>
       
 
@@ -89,6 +121,7 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
         placeholder="Birthday"
         value={guest.birthday}
         onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
+        required
       />
       <input
         className="guest-details-input"
@@ -153,7 +186,7 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
     </div>
   </div>
 
-    </div>
+    </form>
   );
 
   const renderPaginationButtons = () => {
@@ -174,6 +207,36 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
   
     return buttons;
   };
+
+  const ValidateForm = () => {
+    // Check if the primary guest's required fields are filled
+    if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday || !primaryGuest.contactNumber || !primaryGuest.emailAddress || !primaryGuest.street || !primaryGuest.city || !primaryGuest.state || !primaryGuest.zipCode) {
+      alert('Please fill in all required fields for the primary guest.');
+      return;
+    }
+
+    for (let i = 0; i < extraGuests.length; i++) {
+      const extraGuest = extraGuests[i];
+
+      if (!extraGuest.firstName || !extraGuest.middleName || !extraGuest.lastName || !extraGuest.birthday) {
+        alert(`Please fill in all required fields for Extra Guest ${i + 1}.`);
+        return;
+      }
+    }
+
+    // If all checks pass, proceed to the next step
+    onNextStep();
+  };
+  
+  const validateField = (value, fieldName) => {
+    if (!value) {
+      alert(`Please fill in the required field: ${fieldName}.`);
+      return false;
+    }
+    return true;
+  };
+  
+  
 
   return (
     <div>
@@ -196,7 +259,7 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
       </svg>
       </button>
 
-      <button onClick={onNextStep} className="button next">
+      <button onClick={handleSubmit} className="button next">
       <svg viewBox="0 0 24 24" class="icon">
           <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
       </svg>
