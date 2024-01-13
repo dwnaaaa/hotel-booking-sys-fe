@@ -40,6 +40,11 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
             if (primaryGuestId) {
                 console.log(primaryGuestId);
                 await addBookingDetails(primaryGuestId);
+                const brnId = await getLastBRN();
+                console.log(brnId.brn)
+                console.log(bookingDetails.roomNumbers)
+                updateBookedBRN(brnId.brn, bookingDetails.roomNumbers)
+                addGuestToBRNGuest(primaryGuestId,brnId.brn)
             } else {
                 console.error('Primary guest ID not found.');
             }
@@ -110,6 +115,29 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
         }
     };
 
+    // Function to get the last Booking Reference Number (BRN) using the primary guest ID
+    const getLastBRN = async (primaryGuestId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/hbs/booking/lastbrn`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (response.ok) {
+                const result = await response.json();
+                return result;
+            } else {
+                console.error('Failed to retrieve BRN:', response.statusText);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error retrieving BRN:', error);
+            return null;
+        }
+    };    
+
     const addBookingDetails = async (primaryGuestId) => {
         try {
             const bookingData = {
@@ -139,11 +167,34 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
         }
     };
 
+    const updateBookedBRN = async (brn, updateVacancyData) => {
+        try {
+            const formattedRoomNumbersData = {
+                "room_numbers": updateVacancyData,
+            };
+            const response = await fetch(`http://localhost:8080/hbs/room/update-booked-brn/${brn}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formattedRoomNumbersData),
+            });
+    
+            if (response.ok) {
+                console.log('Update successful:');
+            } else {
+                console.error('Failed to update BRN:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error updating BRN:', error);
+        }
+    };
+
     const addGuestToBRNGuest = async (primaryGuestId, brnId) => {
         try {
             const brnGuestData = {
-                brn_id: brnId,
-                guest_id: primaryGuestId,
+                "brn": brnId,
+                "guest_id": primaryGuestId,
             };
     
             const response = await fetch('http://localhost:8080/hbs/brn-guest/add', {
