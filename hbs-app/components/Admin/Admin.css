@@ -10,6 +10,19 @@ body, html {
     align-items: center;
     padding: 10px;
     /* Add additional styling as needed */
+    padding-top: 100px;
+}
+
+.role-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+}
+
+.role{
+    font-size: 2rem;
+    font-family: 'MADEOuterSansThin', sans-serif;
 }
 
 .payroll-button {
@@ -61,6 +74,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap; /* Allows cards to wrap in smaller screens */
+    padding-bottom: 50px;
   }
   
   .admin-container a {

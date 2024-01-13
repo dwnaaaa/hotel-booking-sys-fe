@@ -28,7 +28,7 @@ const About = () => {
         <div className="team-members">
           {/* Repeat this block for each team member */}
           <div className="team-member-card">
-            <img src="/images/team/baclig.jpg" alt="Marie Ashley Ordoñez" className="team-member-photo" />
+            <img src="/images/team/baclig.jpg" alt="Isabel Baclig" className="team-member-photo" />
             <div className="team-member-info">
               <h3>Marie Ashley Ordoñez</h3>
               <p>CEO</p>
@@ -44,25 +44,25 @@ const About = () => {
           </div>
 
           <div className="team-member-card">
-            <img src="/images/team/baclig.jpg" alt="Marie Ashley Ordoñez" className="team-member-photo" />
+            <img src="/images/team/sablay.jpg" alt="James Sablay" className="team-member-photo" />
             <div className="team-member-info">
-              <h3>Marie Ashley Ordoñez</h3>
+              <h3>James Sablay</h3>
               <p>CEO</p>
             </div>
           </div>
 
           <div className="team-member-card">
-            <img src="/images/team/buguis.jpg" alt="Marie Ashley Ordoñez" className="team-member-photo" />
+            <img src="/images/team/buguis.jpg" alt="Francesca Maries Buguis" className="team-member-photo" />
             <div className="team-member-info">
-              <h3>Marie Ashley Ordoñez</h3>
+              <h3>Francesca Maries Buguis</h3>
               <p>CEO</p>
             </div>
           </div>
 
           <div className="team-member-card">
-            <img src="/images/team/villanueva.jpg" alt="Marie Ashley Ordoñez" className="team-member-photo" />
+            <img src="/images/team/villanueva.jpg" alt="Jonalyn Villanueva" className="team-member-photo" />
             <div className="team-member-info">
-              <h3>Marie Ashley Ordoñez</h3>
+              <h3>Jonalyn Villanueva</h3>
               <p>CEO</p>
             </div>
           </div>
