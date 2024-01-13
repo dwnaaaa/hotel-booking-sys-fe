@@ -28,44 +28,73 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
   const [lastName, setLastName] = useState('');
   const [birthday, setBirthday] = useState('');
 
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-  };
 
-  const handleMiddleNameChange = (e) => {
-    setMiddleName(e.target.value);
-  };
+  // const handleSubmit = (e) => {
+  //   // Check if the required fields are filled for the primary guest
+  //   if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday) {
+  //     e.preventDefault(); // Prevent the form from submitting
+  //     alert('Please fill in all required fields for the primary guest.');
+  //     return;
+  //   }
+  
+  //   // Check if there are any extra guests and the guest count is greater than 1
+  //   if (onBookingDetails.guestCount > 1 && extraGuests.length > 0) {
+  //     // Check if the required fields are filled for each extra guest
+  //     for (let i = 0; i < extraGuests.length; i++) {
+  //       const extraGuest = extraGuests[i];
+  
+  //       if (!extraGuest.firstName || !extraGuest.middleName || !extraGuest.lastName || !extraGuest.birthday) {
+  //         e.preventDefault(); // Prevent the form from submitting
+  //         alert(`Please fill in all required fields for Extra Guest ${i + 1}.`);
+  //         return;
+  //       }
+  //     }
+  //   }
+  
+  //   // Continue with the form submission logic or any other actions
+  //   onNextStep();
+  // };
+  
+  
+const handleSubmit = (e) => {
+  // Check if any required fields are empty for the primary guest
+  if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday || !primaryGuest.contactNumber || !primaryGuest.emailAddress || !primaryGuest.street || !primaryGuest.city || !primaryGuest.state || !primaryGuest.zipCode) {
+    e.preventDefault(); // Prevent the form from submitting
+    alert('Please fill in all required fields for the primary guest.');
+    return;
+  }
 
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-  };
+  // Check if there are any extra guests and the guest count is greater than 1
+  if (onBookingDetails.guestCount > 1 && (extraGuests.length === 0 || extraGuests.some(guest => !guest.firstName || !guest.middleName || !guest.lastName || !guest.birthday))) {
+    e.preventDefault(); // Prevent the form from submitting
+    alert('Please fill in all required fields for extra guests.');
+    return;
+  }
 
-  const handleBirthdayChange = (e) => {
-    setBirthday(e.target.value);
-  };
+  // Continue with the form submission logic or any other actions
+  onNextStep();
+};
 
-  const handleSubmit = (e) => {
-    // Check if the required fields are filled
-    if (!firstName || !middleName || !lastName || !birthday) {
-      e.preventDefault(); // Prevent the form from submitting
-      alert('Please fill in all required fields.');
-    } else {
-      // Continue with the form submission logic or any other actions
-      onNextStep();
-    }
-  };
+  
 
   const handlePrimaryGuestChange = (event) => {
-    setPrimaryGuest({ ...primaryGuest, [event.target.name]: event.target.value });
-    onGuestDetailsChange({ ...primaryGuest, [event.target.name]: event.target.value }, extraGuests);
+    setPrimaryGuest((prevPrimaryGuest) => {
+      const updatedPrimaryGuest = { ...prevPrimaryGuest, [event.target.name]: event.target.value };
+      onGuestDetailsChange(updatedPrimaryGuest, extraGuests);
+      return updatedPrimaryGuest;
+    });
   };
+  
 
   const handleExtraGuestChange = (index, event) => {
-    const updatedExtraGuests = [...extraGuests];
-    updatedExtraGuests[index] = { ...updatedExtraGuests[index], [event.target.name]: event.target.value };
-    setExtraGuests(updatedExtraGuests);
-    onGuestDetailsChange(primaryGuest, updatedExtraGuests);
+    setExtraGuests((prevExtraGuests) => {
+      const updatedExtraGuests = [...prevExtraGuests];
+      updatedExtraGuests[index] = { ...updatedExtraGuests[index], [event.target.name]: event.target.value };
+      onGuestDetailsChange(primaryGuest, updatedExtraGuests);
+      return updatedExtraGuests;
+    });
   };
+  
   
   const renderGuestForms = () => {
     const guestForms = [];
@@ -87,33 +116,34 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
       <div>
         <label>Contact Information</label>
         <div className="inline-fields">
-  <input
-    className="guest-details-input"
-    type="text"
-    name="firstName"
-    placeholder="First Name"
-    value={guest.firstName}
-    onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
-    required
-  />
-  <input
-    className="guest-details-input"
-    type="text"
-    name="middleName"
-    placeholder="Middle Name"
-    value={guest.middleName}
-    onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
-    required
-  />
-  <input
-    className="guest-details-input"
-    type="text"
-    name="lastName"
-    placeholder="Last Name"
-    value={guest.lastName}
-    onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
-    required
-  />
+        <input
+  className="guest-details-input"
+  type="text"
+  name="firstName"
+  placeholder="First Name"
+  value={guest.firstName}
+  onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
+  required
+/>
+
+<input
+  className="guest-details-input"
+  type="text"
+  name="middleName"
+  placeholder="Middle Name"
+  value={guest.middleName}
+  onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
+  required
+/>
+
+<input
+  className="guest-details-input"
+  type="text"
+  name="lastName"
+  placeholder="Last Name"
+  value={guest.lastName}
+  onChange={isPrimary ? handlePrimaryGuestChange : (e) => handleExtraGuestChange(index, e)}
+/>
 </div>
     
       </div>
@@ -214,25 +244,25 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
     return buttons;
   };
 
-  // const ValidateForm = () => {
-  //   // Check if the primary guest's required fields are filled
-  //   if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday || !primaryGuest.contactNumber || !primaryGuest.emailAddress || !primaryGuest.street || !primaryGuest.city || !primaryGuest.state || !primaryGuest.zipCode) {
-  //     alert('Please fill in all required fields for the primary guest.');
-  //     return;
-  //   }
+  const ValidateForm = () => {
+    // Check if the primary guest's required fields are filled
+    if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday || !primaryGuest.contactNumber || !primaryGuest.emailAddress || !primaryGuest.street || !primaryGuest.city || !primaryGuest.state || !primaryGuest.zipCode) {
+      alert('Please fill in all required fields for the primary guest.');
+      return;
+    }
 
-  //   for (let i = 0; i < extraGuests.length; i++) {
-  //     const extraGuest = extraGuests[i];
+    for (let i = 0; i < extraGuests.length; i++) {
+      const extraGuest = extraGuests[i];
 
-  //     if (!extraGuest.firstName || !extraGuest.middleName || !extraGuest.lastName || !extraGuest.birthday) {
-  //       alert(`Please fill in all required fields for Extra Guest ${i + 1}.`);
-  //       return;
-  //     }
-  //   }
+      if (!extraGuest.firstName || !extraGuest.middleName || !extraGuest.lastName || !extraGuest.birthday) {
+        alert(`Please fill in all required fields for Extra Guest ${i + 1}.`);
+        return;
+      }
+    }
 
-  //   // If all checks pass, proceed to the next step
-  //   onNextStep();
-  // };
+    // If all checks pass, proceed to the next step
+    onNextStep();
+  };
   
   const validateField = (value, fieldName) => {
     if (!value) {
