@@ -48,7 +48,6 @@ const PaymentSummary = () => {
         fetch(`http://localhost:8080/hbs/brn-room/get-room-number?brn=${firstBRN}`)
           .then(response => response.json())
           .then(roomNumber => {
-            // Do something with the room number if needed
           })
           .catch(error => console.error('Error fetching room number:', error));
   
