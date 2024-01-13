@@ -122,6 +122,30 @@
   max-width: 50px;
 }
 
+.btn-action-check {
+  background-color: #08925a;
+  color: white !important;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.8rem;
+  margin-right: 10px;
+}
+
+
+.btn-action-check:hover{
+  background-color: #c07c00;;
+}
+
+.btn-action-check:active{
+  background-color: #a76600;
+}
+
+
 .btn-action {
   background-color: #d89300;
   color: white !important;

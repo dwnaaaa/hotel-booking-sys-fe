@@ -33,6 +33,7 @@ const Header = () => {
             localStorage.getItem('isLoggedIn') ? <li><a href="/login">Logout</a></li> : <li><a href="/login" onClick={() => logOut()}>Login</a></li>
           }
           {/* Add Book Now button */}
+          
           <li className="book-now"><a href="/addbooking">Book Now</a></li>
         </ul>
       </nav>

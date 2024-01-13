@@ -1,8 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './BookingDetailsPopup.css';
 import '../PopupGlobal.css';
 
 const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, roomQuantity,primaryGuestName, otherGuests, onClose }) => {
+  const [booking, setBooking] = useState([])
+  let bk = {}
   const roomTypeImages = [
     { type: 'Deluxe', url: 'images/rooms/twin.jpg' },
     { type: 'Suite', url: 'images/rooms/king.jpg' },
@@ -21,16 +23,59 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
     onClose(); 
   };
 
+  const checkIn = async () => {
+    console.log(booking.brn)
+    const response = await fetch(`http://localhost:8080/hbs/booking/check-in/${booking.brn}`,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "PATCH",
+    }).then(response => {
+      if(!response.ok) {
+        console.log("check in failed")
+      } else {
+        console.log("Checked in")
+      }
+    })
+  }
+
+  const checkOut = async () => {
+    console.log(booking.brn)
+    const response = await fetch(`http://localhost:8080/hbs/booking/check-out/${booking.brn}`,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "PATCH",
+    }).then(response => {
+      if(!response.ok) {
+        console.log("check out failed")
+      } else {
+        console.log("Checked out")
+      }
+    })
+  }
+
   useEffect(() => {
     const fetchBooking = async () => {
       console.log(bookingRef)
-      const response = await fetch(`http://localhost:8080/hbs/booking/${bookingRef}`)
-      // const bookingData = await response.json()
-
+      const response = await fetch(`http://localhost:8080/hbs/booking/${bookingRef}`);
+      const bookingData = await response.json().then(data => {
+        setBooking(data)
+        bk = data
+        console.log(bk)
+        // console.log(booking.brn)
+      })
+      // setBooking(bookingData)
+      // console.log(booking)
+      // console.log(booking)
     }
 
     fetchBooking()
-  },[])
+  },[bookingRef])
 
   return (
     <div className="popup-container">
@@ -46,8 +91,8 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
         
         
         <div className="overall-content">
-        {/* <h2>{bookingData.brn}</h2> */}
-        {/* <h4>{bookingData.roomType}</h4> */}
+        <h2>{booking.brn}</h2>
+        <h4>{booking.roomType}</h4>
 
         <hr></hr>
 
@@ -58,22 +103,22 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
             <div className="left-column">
               <div className="checkin-checkout">
                 <div className="checkin">
-                  {/* <p>{bookingData.checkInDate}</p> */}
+                  <p>{booking.checkInDate}</p>
                   <small>Check In</small>
                 </div>
                 <div className="checkout">
-                  {/* <p>{bookingData.checkOutDate}</p> */}
+                  <p>{booking.checkOutDate}</p>
                   <small>Check Out</small>
                 </div>
               </div>
               <div className="rooms-booked">
-                {/* <p>Room {bookingData.noOfRooms}</p> */}
+                <p>Room {booking.noOfRooms}</p>
                 <small>Rooms Booked</small>
               </div>
             </div>
 
             <div className="right-column">
-              {/* <p>{bookingData.primaryGuestId}</p> */}
+              <p>{booking.primaryGuestId}</p>s
               <small>Primary Guest</small>
               <div className="other-guests">
               {otherGuests ? 
@@ -95,7 +140,8 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
 
         <div className="action-buttons">
           {/* <button onClick={onClose} className="btn-close">Close</button> */}
-          <a href="/checkout" className="btn-action">Checkout</a>
+          <a  className="btn-action-check" onClick={checkIn}>Checkin</a>
+          <a href="/checkout" className="btn-action" onClick={checkOut}>Checkout</a>
         </div>
       </div>
     </div>
