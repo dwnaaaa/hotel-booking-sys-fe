@@ -46,7 +46,7 @@ const Footer = () => {
                     </div>
                     
                     <p><strong>Phone:</strong> 123-456-7890</p>
-                    <p><strong>Email:</strong> contact@hotelname.com</p>
+                    <p><strong>Email:</strong> b0qrit@lbm.com</p>
                     <div className='social-media'>
                     <a href="#" class="social-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

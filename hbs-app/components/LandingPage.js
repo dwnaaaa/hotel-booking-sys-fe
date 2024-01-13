@@ -36,17 +36,6 @@ const LandingPage = () => {
     </div>
   </section>
 
-
-      <section className="featured-hotels">
-        <h2>Featured Hotels</h2>
-        {/* You would fetch and display featured hotels here */}
-      </section>
-
-      <section className="testimonials">
-        <h2>Customer Testimonials</h2>
-        {/* Testimonials would go here */}
-      </section>
-
     </div>
     </Layout>
   );
