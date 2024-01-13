@@ -44,15 +44,19 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
                 console.log(brnId.brn)
                 console.log(bookingDetails.roomNumbers)
                 updateBookedBRN(brnId.brn, bookingDetails.roomNumbers)
-                addGuestToBRNGuest(primaryGuestId,brnId.brn)
+                addGuestToBRNGuest(primaryGuestId, brnId.brn);
+    
+                window.location.href = '/dashboard';
             } else {
                 console.error('Primary guest ID not found.');
+                alert(`Booking confirmation failed`);
             }
         } catch (error) {
             console.error('Error confirming booking:', error);
+            alert(`Booking confirmation failed`); 
         }
     };
-
+    
     const addGuestDetails = async () => {
         try {
             const formattedGuestData = bookingDetails.guests.map(guest => ({
