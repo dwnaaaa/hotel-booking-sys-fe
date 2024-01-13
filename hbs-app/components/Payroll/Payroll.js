@@ -1,14 +1,16 @@
 import React from 'react'
 import Layout from '../Layout/Layout'
 import './Payroll.css'
+import Button from '../Dashboard/Buttons/Button'
+
 
 const Payroll = () => {
   // Example data, replace with real data
   const payrollData = [
-    { number: "001", name: "John Doe", type: "Front Desk", period: "01/01/2024 - 01/15/2024", salary: "3000" },
-    { number: "002", name: "Jane Smith", type: "Housekeeping", period: "01/01/2024 - 01/15/2024", salary: "1500" },
+    { number: "001", name: "John Doe", type: "Front Desk", salary: "3000", icon: <Button /> },
+    { number: "002", name: "Jane Smith", type: "Housekeeping", salary: "1500", icon: <Button /> },
     // Add more payroll data here
-  ];
+  ]; 
 
   const totalSalary = payrollData.reduce((acc, employee) => acc + Number(employee.salary), 0);
   const employeeCount = payrollData.length;
@@ -27,8 +29,8 @@ const Payroll = () => {
               <th>Employee ID</th>
               <th>Employee Name</th>
               <th>Employee Type</th>
-              <th>Pay Period</th>
               <th>Salary</th>
+              <th className='icon-column'></th>
             </tr>
           </thead>
           <tbody>
@@ -37,8 +39,8 @@ const Payroll = () => {
                 <td>{employee.number}</td>
                 <td>{employee.name}</td>
                 <td>{employee.type}</td>
-                <td>{employee.period}</td>
                 <td>{employee.salary}</td>
+                <td className='icon-column '>{employee.icon}</td>
               </tr>
             ))}
           </tbody>
