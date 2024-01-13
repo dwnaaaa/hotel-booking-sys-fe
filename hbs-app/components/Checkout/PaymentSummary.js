@@ -8,9 +8,10 @@ const PaymentSummary = () => {
   const [services, setServices] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [selectedServiceCode, setSelectedServiceCode] = useState('');
+  const [roomCost, setRoomCost] = useState(0);
 
   // Costs
-  const roomCost = 100;
+  //const roomCost = 100;
   // const productsCost = 30;
   // const service1Cost = 15;
   // const service2Cost = 20;
@@ -25,6 +26,8 @@ const PaymentSummary = () => {
   //http://localhost:8080/hbs/brn-room/by-room/{roomNumber}
 //display service from brn
   //http://localhost:8080/hbs/brn-room/by-brn/{brn}/{serviceCode}
+//display room cost
+  //http://localhost:8080/hbs/room-type/get-room-cost/{roomType}
 
 
   useEffect(() => {
@@ -34,30 +37,38 @@ const PaymentSummary = () => {
         setRoomsDB(data);
         const firstBRN = data[0]?.brn;
         setBRN(firstBRN);
-
+  
         fetch(`http://localhost:8080/hbs/brn-room/total-price/${firstBRN}`)
           .then(response => response.json())
           .then(totalAmount => {
             setTotal(totalAmount);
           })
           .catch(error => console.error('Error fetching total amount:', error));
-
+  
         fetch(`http://localhost:8080/hbs/brn-room/get-room-number?brn=${firstBRN}`)
           .then(response => response.json())
           .then(roomNumber => {
             // Do something with the room number if needed
           })
           .catch(error => console.error('Error fetching room number:', error));
-
+  
         fetch(`http://localhost:8080/hbs/brn-room/by-room/${firstBRN}`)
           .then(response => response.json())
           .then(services => {
             setServices(services);
           })
           .catch(error => console.error('Error fetching services per room:', error));
+  
+        // Fetch and set room cost
+        fetch(`http://localhost:8080/hbs/room-type/get-room-cost/A`)
+          .then(response => response.json())
+          .then(roomCost => {
+            setRoomCost(roomCost);
+          })
+          .catch(error => console.error('Error fetching room cost:', error));
       })
       .catch(error => console.error('Error fetching BRN from BRN services:', error));
-
+  
     if (brn && selectedServiceCode) {
       fetch(`http://localhost:8080/hbs/brn-room/by-brn/${brn}/${selectedServiceCode}`)
         .then(response => response.json())
