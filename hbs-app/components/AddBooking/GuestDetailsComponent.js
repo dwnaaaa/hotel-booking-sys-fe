@@ -22,56 +22,20 @@ const GuestDetailsComponent = ({ onPreviousStep, onNextStep, onBookingDetails, o
   const [extraGuests, setExtraGuests] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [guestsPerPage, setGuestsPerPage] = useState(1);
-
-  const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [birthday, setBirthday] = useState('');
-
-
-  // const handleSubmit = (e) => {
-  //   // Check if the required fields are filled for the primary guest
-  //   if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday) {
-  //     e.preventDefault(); // Prevent the form from submitting
-  //     alert('Please fill in all required fields for the primary guest.');
-  //     return;
-  //   }
-  
-  //   // Check if there are any extra guests and the guest count is greater than 1
-  //   if (onBookingDetails.guestCount > 1 && extraGuests.length > 0) {
-  //     // Check if the required fields are filled for each extra guest
-  //     for (let i = 0; i < extraGuests.length; i++) {
-  //       const extraGuest = extraGuests[i];
-  
-  //       if (!extraGuest.firstName || !extraGuest.middleName || !extraGuest.lastName || !extraGuest.birthday) {
-  //         e.preventDefault(); // Prevent the form from submitting
-  //         alert(`Please fill in all required fields for Extra Guest ${i + 1}.`);
-  //         return;
-  //       }
-  //     }
-  //   }
-  
-  //   // Continue with the form submission logic or any other actions
-  //   onNextStep();
-  // };
-  
   
 const handleSubmit = (e) => {
-  // Check if any required fields are empty for the primary guest
   if (!primaryGuest.firstName || !primaryGuest.middleName || !primaryGuest.lastName || !primaryGuest.birthday || !primaryGuest.contactNumber || !primaryGuest.emailAddress || !primaryGuest.street || !primaryGuest.city || !primaryGuest.state || !primaryGuest.zipCode) {
-    e.preventDefault(); // Prevent the form from submitting
+    e.preventDefault(); 
     alert('Please fill in all required fields for the primary guest.');
     return;
   }
 
-  // Check if there are any extra guests and the guest count is greater than 1
   if (onBookingDetails.guestCount > 1 && (extraGuests.length === 0 || extraGuests.some(guest => !guest.firstName || !guest.middleName || !guest.lastName || !guest.birthday))) {
-    e.preventDefault(); // Prevent the form from submitting
+    e.preventDefault(); 
     alert('Please fill in all required fields for extra guests.');
     return;
   }
 
-  // Continue with the form submission logic or any other actions
   onNextStep();
 };
 
