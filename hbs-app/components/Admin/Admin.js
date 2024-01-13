@@ -119,7 +119,9 @@ const Admin = () => {
             </a>
 
             </div>
-            <label>Current role: {typeDisplay}</label>
+            <div class="role-container">
+            <div class="role">{typeDisplay}</div>
+            </div>
         </div>
 
         <Dashboard supervisorType={selectedType}/>
