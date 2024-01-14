@@ -11,6 +11,7 @@ import BookingDetailsPopup from './BookingDetailsPopup/BookingDetailsPopup';
 import KitchenPopup from './KitchenPopup/KitchenPopup';
 import ConciergePopup from './ConciergePopup/ConciergePopup';
 import ViewBillPopup from './ViewBillPopup/ViewBillPopup';
+import Header from '../Header/Header';
 
 function Dashboard({ supervisorType }) {
   const router = useRouter();
@@ -61,72 +62,6 @@ function Dashboard({ supervisorType }) {
     const date = new Date(dateString);
     return date.toLocaleString('en-US', options);
   };
-
-  // function formatDateTime(dateTimeString) {
-  //   const options = {
-  //     day: '2-digit',
-  //     month: '2-digit',
-  //     year: 'numeric',
-  //     hour: '2-digit',
-  //     minute: '2-digit',
-  //   };
-  
-  //   const dateTime = new Date(dateTimeString);
-  //   return dateTime.toLocaleString('en-GB', options);
-  // }
-  
-  // const confirmedBookings = [
-  //   {
-  //     primaryGuestName: "Francesca Maries Buguis",
-  //     bookingRef: "AXH57Z",
-  //     checkInTime: "2024-01-05 14:00",
-  //     checkOutTime: "2024-01-010 14:00",
-  //     roomType: "Deluxe Suite",
-  //     roomQuantity: 2
-  //   },
-  //   {
-  //     bookingRef: "BKH34M",
-  //     primaryGuestName: "Francesca Maries Buguis",
-  //     checkInTime: "2024-01-06 15:00",
-  //     checkOutTime: "2024-01-010 14:00",
-  //     roomType: "Single Room",
-  //     roomQuantity: 1
-  //   },
-  // ];
-
-  // const otherGuests = [
-  //   { id: 1, name: 'John Doe' },
-  //   { id: 2, name: 'Jane Smith' },
-  //   { id: 3, name: 'Emily Johnson' },
-  //   // ... more guests
-  // ];
-  
-
-  // const getRoomType = (roomNumber) => {
-  //   if (roomNumber >= 1 && roomNumber <= 5) {
-  //     return 'Twin';
-  //   } else if (roomNumber >= 6 && roomNumber <= 10) {
-  //     return 'Deluxe Twin';
-  //   } else if (roomNumber >= 11 && roomNumber <= 15) {
-  //     return 'Double Deck';
-  //   } else if (roomNumber >= 16 && roomNumber <= 20) {
-  //     return 'King';
-  //   }
-  // };
-
-  // const getRandomStatus = () => Math.random() > 0.5 ? 'occupied' : 'available';
-
-  // const cardsData = Array.from({ length: 20 }, (_, i) => {
-  //   const roomNumber = i + 1;
-  //   const roomType = getRoomType(roomNumber);
-  //   const status = getRandomStatus();
-  //   console.log(`Room ${roomNumber}: ${status}`); // Log the status
-  //   return {
-  //     title: `Room ${roomNumber}`,
-  //     content: `${roomType}`,
-  //     status: status
-  //   };
-  // });
 
   useEffect(() => {
 
@@ -186,7 +121,6 @@ function Dashboard({ supervisorType }) {
     <Layout>
       <div className="front-desk-container">
         <div className="column column-left">
-          
         <h1>Bookings</h1>
 
         <div className="header-container">

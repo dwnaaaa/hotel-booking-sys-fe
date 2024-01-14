@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('isLoggedIn', false)
-  })
+  },[])
   
   return (
     <div className="App">

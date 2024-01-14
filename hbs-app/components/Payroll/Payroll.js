@@ -131,7 +131,7 @@ const Payroll = () => {
             </div>
 
                 <div className="submit-button-container">
-                <button className="submit-button" onClick={handleSaveChanges}>
+                <button className="submit-button" onClick={handleSalaryChange}>
                     Submit payroll
 
                     <svg className="right-arrow-icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -42,11 +42,15 @@ const LoginPage = () => {
               localStorage.setItem('jwt', jwt)
               localStorage.setItem('type', type)
               localStorage.setItem('isLoggedIn', true)
+
+              if(type = 'S') {
+                router.push('/admin');
+              } else {
+                router.push('/dashboard')
+              }
             })
           })
         })
-        console.log("user authenticated");
-        router.push('/dashboard');
       }
     })
   };
