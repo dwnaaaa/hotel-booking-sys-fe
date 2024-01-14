@@ -43,7 +43,7 @@ const LoginPage = () => {
               localStorage.setItem('type', type)
               localStorage.setItem('isLoggedIn', true)
 
-              if(type = 'S') {
+              if(type === 'S') {
                 router.push('/admin');
               } else {
                 router.push('/dashboard')
