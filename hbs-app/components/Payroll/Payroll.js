@@ -30,13 +30,13 @@ const Payroll = () => {
     }));
   };
 
-  // const handleSaveChanges = () => {
-  //   // Handle saving changes to the state or server
-  //   // You can use the editedSalaries state to update the actual state or perform other actions
-  //   console.log("Saving changes:", editedSalaries);
-  //   setEditMode(false);
-  //   setEditableIndex(null);
-  // };
+  const handleSaveChanges = () => {
+    // Handle saving changes to the state or server
+    // You can use the editedSalaries state to update the actual state or perform other actions
+    console.log("Saving changes:", editedSalaries);
+    setEditMode(false);
+    setEditableIndex(null);
+  };
 
   const [payrollData, setPayrollData] = useState([]);
 
@@ -101,7 +101,17 @@ const Payroll = () => {
                   <tr key={index}>
                   <td>{employee.number}</td>
                   <td>{employee.name}</td>
-                  <td>{employee.type}</td>
+                  <td>
+                    {
+                      employee.type === 'F' ? 'Front Desk' :
+                      employee.type === 'H' ? 'Housekeeping' :
+                      employee.type === 'K' ? 'Kitchen' :
+                      employee.type === 'C' ? 'Concierge' :
+                      employee.type === 'S' ? 'Supervisor' :
+                      'Invalid Employee Type'
+                    }
+                    </td>
+          
                   <td>
                     {editMode && editableIndex === index ? (
                       <div style={{ display: 'flex', alignItems: 'center' }}>
