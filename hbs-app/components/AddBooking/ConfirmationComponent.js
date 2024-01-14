@@ -28,10 +28,10 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
     
 
     //Pass information to backend
-
     const handleConfirmBooking = async () => {
         try {
             const primaryGuest = bookingDetails.guests[0];
+            
     
             await addGuestDetails();
     
@@ -44,14 +44,18 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
                 console.log(brnId.brn)
                 console.log(bookingDetails.roomNumbers)
                 updateBookedBRN(brnId.brn, bookingDetails.roomNumbers)
-                addGuestToBRNGuest(primaryGuestId, brnId.brn);
+
+                const guestIDs = await getAllGuestIdByName(bookingDetails.guests);
+                console.log(guestIDs)
+                addGuestToBRNGuest(guestIDs, brnId.brn);
     
                 // window.location.href = '/dashboard';
             } else {
                 console.error('Primary guest ID not found.');
                 alert(`Booking confirmation failed`);
             }
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Error confirming booking:', error);
             alert(`Booking confirmation failed`); 
         }
@@ -119,7 +123,38 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
         }
     };
 
-    // Function to get the last Booking Reference Number (BRN) using the primary guest ID
+    const getAllGuestIdByName = async (guests) => {
+        try {
+            const requestData = guests.map(guest => ({
+                first_name: guest.firstName,
+                middle_name: guest.middleName,
+                last_name: guest.lastName,
+            }));
+
+            console.log(requestData)
+    
+            const response = await fetch('http://localhost:8080/hbs/guest/ids', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData),
+            });
+    
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result)
+                return result;
+            } else {
+                console.error('Failed to retrieve primary guest ID:', response.statusText);
+                return null;
+            }
+        } catch (error) {
+            console.error('Error retrieving primary guest ID:', error);
+            return null;
+        }
+    };
+
     const getLastBRN = async (primaryGuestId) => {
         try {
             const response = await fetch(`http://localhost:8080/hbs/booking/lastbrn`, {
@@ -194,30 +229,30 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
         }
     };
 
-    const addGuestToBRNGuest = async (primaryGuestId, brnId) => {
+    const addGuestToBRNGuest = async (GuestIds, brnId) => {
         try {
-            const brnGuestData = {
+            const brnGuestDataArray = GuestIds.map(guestId => ({
                 "brn": brnId,
-                "guest_id": primaryGuestId,
-            };
+                "guest_id": guestId,
+            }));
     
-            const response = await fetch('http://localhost:8080/hbs/brn-guest/add', {
+            const response = await fetch('http://localhost:8080/hbs/brn-guest/add-many', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(brnGuestData),
+                body: JSON.stringify(brnGuestDataArray),
             });
     
             if (response.ok) {
-                console.log('Guest added to BRN guest table.');
+                console.log('Guests added to BRN guest table.');
             } else {
-                console.error('Failed to add guest to BRN guest table.');
+                console.error('Failed to add guests to BRN guest table.');
             }
         } catch (error) {
-            console.error('Error adding guest to BRN guest table:', error);
+            console.error('Error adding guests to BRN guest table:', error);
         }
-    };    
+    };      
     
     return (
         <div>
