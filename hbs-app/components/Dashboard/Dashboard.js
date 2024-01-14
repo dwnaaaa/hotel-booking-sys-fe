@@ -11,7 +11,6 @@ import BookingDetailsPopup from './BookingDetailsPopup/BookingDetailsPopup';
 import KitchenPopup from './KitchenPopup/KitchenPopup';
 import ConciergePopup from './ConciergePopup/ConciergePopup';
 import ViewBillPopup from './ViewBillPopup/ViewBillPopup';
-import Header from '../Header/Header';
 
 function Dashboard({ supervisorType }) {
   const router = useRouter();
@@ -36,12 +35,6 @@ function Dashboard({ supervisorType }) {
   const handleConciergeClick = (booking) => {
     setSelectedBooking({ ...booking, type: 'concierge' });
   };
-
-  // const handleViewBillClick = () => {
-  //   <ViewBillPopup
-  //     onClose={closePopup}
-  //   />
-  // };
 
   const handleViewBillClick = () => {
     setIsPopupOpen(true);

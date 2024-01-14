@@ -74,10 +74,10 @@ const Card = ({ room, bookingRef, onBookingClick, onHousekeepingClick, onKitchen
           throw new Error('Failed to fetch booking data')
         }
 
-        const bookingData = await response.json().then(booking => {
-          setBooking(booking)
-          console.log(booking)
-        })
+        // const bookingData = await response.json().then(booking => {
+        //   setBooking(booking)
+        //   console.log(booking)
+        // })
       }
     }
 

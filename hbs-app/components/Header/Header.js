@@ -15,13 +15,15 @@ const Header = () => {
   };
 
   const getDashboardLink = () => {
+
+    console.log(userType)
     if (userType === null) {
       return '/';
     }
 
-    if (userType === 'S') {
-      return '/admin';
-    }
+    // if (userType === 'S') {
+    //   return '/admin';
+    // }
 
     return '/dashboard';
   };
