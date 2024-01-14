@@ -105,7 +105,32 @@ const ConciergePopup = ({ bookingRef,roomType, onClose }) => {
     }
   };
   
+  const addService = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/hbs/brn-service/add-service', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          brn: brn_Services.brn,
+          serviceCode: brn_Services.serviceCode,
+          roomNumber: brn_Services.roomNumber, 
+          quantity: brn_Services.quantity,  
+        }),
+      });
 
+      if (response.ok) {
+        // Service added successfully
+        alert('Service added successfully.');
+      } else {
+        // Handle error
+        alert('Failed to add service.');
+      }
+    } catch (error) {
+      console.error('Error adding service:', error);
+    }
+  };
 
   const handleConfirm = () => {
     console.log("Confirm actions for room", bookingRef);

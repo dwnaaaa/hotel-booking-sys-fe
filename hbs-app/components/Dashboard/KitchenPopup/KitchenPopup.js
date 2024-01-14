@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ServicesCard from '../ServicesCard';
 import '../PopupGlobal.css';
 
@@ -26,72 +26,92 @@ const KitchenPopup = ({ bookingRef,roomType, onClose }) => {
     }));
   };
 
-  const services = [
-    {
-      id: "cateringSergices",
-      name: "Catering Services",
-      imageUrl: "images/kitchen/catering.svg",
-      code: "3001"
-    },
-    {
-      id: "personalChef",
-      name: "Personal Chef",
-      imageUrl: "images/kitchen/chef.svg",
-      code: "3002" 
-    },
-    {
-      id: "customizedMeal",
-      name: "Custom Meal Plan",
-      imageUrl: "images/kitchen/meal.svg",
-      code: "3003"
-    },
-    {
-      id: "culinaryExperience",
-      name: "Interactive Culinary",
-      imageUrl: "images/kitchen/culinary.svg",
-      code: "3004"
-    }
-  ];
+  // const services = [
+  //   {
+  //     id: "cateringSergices",
+  //     name: "Catering Services",
+  //     imageUrl: "images/kitchen/catering.svg",
+  //     code: "3001"
+  //   },
+  //   {
+  //     id: "personalChef",
+  //     name: "Personal Chef",
+  //     imageUrl: "images/kitchen/chef.svg",
+  //     code: "3002" 
+  //   },
+  //   {
+  //     id: "customizedMeal",
+  //     name: "Custom Meal Plan",
+  //     imageUrl: "images/kitchen/meal.svg",
+  //     code: "3003"
+  //   },
+  //   {
+  //     id: "culinaryExperience",
+  //     name: "Interactive Culinary",
+  //     imageUrl: "images/kitchen/culinary.svg",
+  //     code: "3004"
+  //   }
+  // ];
 
-  const inHouseMeals = [
-    { id: "breakfast", name: "Breakfast", imageUrl: "images/kitchen/meals/breakfast.webp", code: "4001" },
-    { id: "lunch", name: "Lunch", imageUrl: "images/kitchen/meals/lunch.webp", code: "4002" },
-    { id: "dinner", name: "Dinner", imageUrl: "images/kitchen/meals/dinner.webp", code: "4003" }
-  ];
+  // const inHouseMeals = [
+  //   { id: "breakfast", name: "Breakfast", imageUrl: "images/kitchen/meals/breakfast.webp", code: "4001" },
+  //   { id: "lunch", name: "Lunch", imageUrl: "images/kitchen/meals/lunch.webp", code: "4002" },
+  //   { id: "dinner", name: "Dinner", imageUrl: "images/kitchen/meals/dinner.webp", code: "4003" }
+  // ];
   
-  const alcohols = [
-    { id: "beers", name: "Beers", imageUrl: "images/kitchen/alcohol/beers.webp", code: "5001" },
-    { id: "wines", name: "Wines", imageUrl: "images/kitchen/alcohol/wines.webp", code: "5002" },
-    { id: "spirits", name: "Spirits", imageUrl: "images/kitchen/alcohol/spirits.webp", code: "5003" },
-    { id: "cocktails", name: "Cocktails", imageUrl: "images/kitchen/alcohol/cocktails.webp", code: "5004" },
-    { id: "liqueurs", name: "Liqueurs", imageUrl: "images/kitchen/alcohol/liqueurs.webp", code: "5005" }
-  ];
+  // const alcohols = [
+  //   { id: "beers", name: "Beers", imageUrl: "images/kitchen/alcohol/beers.webp", code: "5001" },
+  //   { id: "wines", name: "Wines", imageUrl: "images/kitchen/alcohol/wines.webp", code: "5002" },
+  //   { id: "spirits", name: "Spirits", imageUrl: "images/kitchen/alcohol/spirits.webp", code: "5003" },
+  //   { id: "cocktails", name: "Cocktails", imageUrl: "images/kitchen/alcohol/cocktails.webp", code: "5004" },
+  //   { id: "liqueurs", name: "Liqueurs", imageUrl: "images/kitchen/alcohol/liqueurs.webp", code: "5005" }
+  // ];
   
-  const foods = [
-    { id: "appetizers", name: "Appetizers", imageUrl: "images/kitchen/food/appetizers.webp", code: "6001" },
-    { id: "salads", name: "Salads", imageUrl: "images/kitchen/food/salads.webp", code: "6002" },
-    { id: "soups", name: "Soups", imageUrl: "images/kitchen/food/soups.webp", code: "6003" },
-    { id: "meatDishes", name: "Meat Dishes", imageUrl: "images/kitchen/food/meatDishes.webp", code: "6004" },
-    { id: "seafood", name: "Seafood", imageUrl: "images/kitchen/food/seafood.webp", code: "6005" },
-    { id: "vegetarian", name: "Vegetarian Options", imageUrl: "images/kitchen/food/vegetarian.webp", code: "6006" },
-    { id: "sides", name: "Sides", imageUrl: "images/kitchen/food/sides.webp", code: "6007" },
-    { id: "desserts", name: "Desserts", imageUrl: "images/kitchen/food/desserts.webp", code: "6008" },
-    { id: "snacks", name: "Snacks", imageUrl: "images/kitchen/food/snacks.webp", code: "6009" }
-  ];
+  // const foods = [
+  //   { id: "appetizers", name: "Appetizers", imageUrl: "images/kitchen/food/appetizers.webp", code: "6001" },
+  //   { id: "salads", name: "Salads", imageUrl: "images/kitchen/food/salads.webp", code: "6002" },
+  //   { id: "soups", name: "Soups", imageUrl: "images/kitchen/food/soups.webp", code: "6003" },
+  //   { id: "meatDishes", name: "Meat Dishes", imageUrl: "images/kitchen/food/meatDishes.webp", code: "6004" },
+  //   { id: "seafood", name: "Seafood", imageUrl: "images/kitchen/food/seafood.webp", code: "6005" },
+  //   { id: "vegetarian", name: "Vegetarian Options", imageUrl: "images/kitchen/food/vegetarian.webp", code: "6006" },
+  //   { id: "sides", name: "Sides", imageUrl: "images/kitchen/food/sides.webp", code: "6007" },
+  //   { id: "desserts", name: "Desserts", imageUrl: "images/kitchen/food/desserts.webp", code: "6008" },
+  //   { id: "snacks", name: "Snacks", imageUrl: "images/kitchen/food/snacks.webp", code: "6009" }
+  // ];
   
 
-  const beverages = [
-    { id: "coffee", name: "Coffee", imageUrl: "images/kitchen/beverages/coffee.webp", code: "7001" },
-    { id: "tea", name: "Tea", imageUrl: "images/kitchen/beverages/tea.webp", code: "7002" },
-    { id: "juices", name: "Juices", imageUrl: "images/kitchen/beverages/juices.webp", code: "7003" },
-    { id: "softDrinks", name: "Soft Drinks", imageUrl: "images/kitchen/beverages/softDrinks.webp", code: "7004" },
-    { id: "water", name: "Water", imageUrl: "images/kitchen/beverages/water.webp", code: "7005" },
-    { id: "energyDrinks", name: "Energy Drinks", imageUrl: "images/kitchen/beverages/energyDrinks.webp", code: "7006" },
-    { id: "milk", name: "Milk", imageUrl: "images/kitchen/beverages/milk.webp", code: "7007" }
-  ];
+  // const beverages = [
+  //   { id: "coffee", name: "Coffee", imageUrl: "images/kitchen/beverages/coffee.webp", code: "7001" },
+  //   { id: "tea", name: "Tea", imageUrl: "images/kitchen/beverages/tea.webp", code: "7002" },
+  //   { id: "juices", name: "Juices", imageUrl: "images/kitchen/beverages/juices.webp", code: "7003" },
+  //   { id: "softDrinks", name: "Soft Drinks", imageUrl: "images/kitchen/beverages/softDrinks.webp", code: "7004" },
+  //   { id: "water", name: "Water", imageUrl: "images/kitchen/beverages/water.webp", code: "7005" },
+  //   { id: "energyDrinks", name: "Energy Drinks", imageUrl: "images/kitchen/beverages/energyDrinks.webp", code: "7006" },
+  //   { id: "milk", name: "Milk", imageUrl: "images/kitchen/beverages/milk.webp", code: "7007" }
+  // ];
   
+  const mapServiceToCard = (hatdog) => ({
+    id: hatdog.SERVICE_CODE.toString(), // Assuming SERVICE_CODE is a number
+    name: hatdog.SERVICE_NAME,
+    imageUrl: `images/kitchen/meals/${service.SERVICE_NAME.toLowerCase()}.webp`,
+    code: hatdog.SERVICE_CODE.toString(),
+    description: hatdog.DESCRIPTION,
+    employeeType: hatdog.EMPLOYEE_TYPE,
+    price: hatdog.PRICE
+    
+  });
+
+  const renderServicesCards = () => {
+    return services.map((service) => (
+      <ServicesCard
+        key={service.SERVICE_CODE}
+        service={mapServiceToCard(service)}
+        onCardSelect={handleCardSelect}
+      />
+    ));
+  };
   
-  const allItems = [...inHouseMeals, ...alcohols, ...foods, ...beverages];
+  // const allItems = [...inHouseMeals, ...alcohols, ...foods, ...beverages];
 
 
   const [serviceCode, setServiceCode] = useState('');
@@ -100,6 +120,12 @@ const KitchenPopup = ({ bookingRef,roomType, onClose }) => {
     setServiceCode(e.target.value);
   };
 
+  useEffect(() => {
+    addServiceByCode();
+    getServices();
+    console.log(hatdog)
+  }, []);
+  
   const addServiceByCode = () => {
     const service = allItems.find(item => item.code === serviceCode);
     if (service) {
@@ -107,9 +133,51 @@ const KitchenPopup = ({ bookingRef,roomType, onClose }) => {
   
       alert(`${service.name} added successfully.`);
     } else {
-      alert("Invalid service code.");
+      // alert("Invalid service code.");
     }
   };
+
+  const [hatdog, setHatdogCode] = useState('');
+
+  const getServices = async () => {
+    try {
+      let response = await fetch(`http://localhost:8080/hbs/service/K`);
+      let services = await response.json();
+      console.log("add service");
+      setHatdogCode(services);
+      console.log(hatdog)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const addService = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/hbs/brn-service/add-service`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          brn: brn_Services.brn,
+          serviceCode: brn_Services.serviceCode,
+          roomNumber: brn_Services.roomNumber, 
+          quantity: brn_Services.quantity,  
+        }),
+      });
+
+      if (response.ok) {
+        // Service added successfully
+        alert('Service added successfully.');
+      } else {
+        // Handle error
+        alert('Failed to add service.');
+      }
+    } catch (error) {
+      console.error('Error adding service:', error);
+    }
+  };
+
   
   const handleConfirm = () => {
     console.log("Confirm actions for room", bookingRef);
@@ -157,7 +225,7 @@ const KitchenPopup = ({ bookingRef,roomType, onClose }) => {
 
           <h3>Services</h3>
           <div className="services-container">
-          {services.map(service => (
+          {/* {services.map(service => (
             <ServicesCard
               key={service.id}
               service={service.name}
@@ -165,7 +233,9 @@ const KitchenPopup = ({ bookingRef,roomType, onClose }) => {
               code={service.code}
               onCardSelect={handleCardSelect}
             />
-          ))}
+          ))} */}
+
+          {renderServicesCards()}
         </div>
 
         <h3>Kitchen Items</h3>
@@ -234,6 +304,6 @@ const KitchenPopup = ({ bookingRef,roomType, onClose }) => {
       </div>
     </div>
   );
-};
+;}
 
 export default KitchenPopup;

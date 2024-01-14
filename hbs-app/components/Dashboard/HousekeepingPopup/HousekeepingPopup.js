@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ServicesCard from '../ServicesCard';
 import '../PopupGlobal.css';
 
@@ -67,7 +67,9 @@ const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
     { id: "cereal", name: "Cereal", imageUrl: "images/bar/cereals.webp", code: "2010" }
   ];
 
-  const allItems = [...services, ...barItems];
+  // const allItems = [...services, ...barItems];
+
+  const [allItems, setAllItems] = useState([]);
 
   const [serviceCode, setServiceCode] = useState('');
   
@@ -88,8 +90,54 @@ const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
       alert("Invalid service code.");
     }
   };
-  
 
+  // const [hatdog, setHatdogCode] = useState('');
+
+  const getServices = async () => {
+    try {
+      let response = await fetch(`http://localhost:8080/hbs/service/H`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      let services = await response.json();
+      // console.log("Received services:", services);  // Log the services data
+      setAllItems([...services]);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
+  };
+
+  useEffect(() => {
+    getServices();
+  });
+  
+  
+  const addService = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/hbs/brn-service/add-service', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          brn: brn_Services.brn,
+          serviceCode: brn_Services.serviceCode,
+          roomNumber: brn_Services.roomNumber, 
+          quantity: brn_Services.quantity,  
+        }),
+      });
+
+      if (response.ok) {
+        // Service added successfully
+        alert('Service added successfully.');
+      } else {
+        // Handle error
+        alert('Failed to add service.');
+      }
+    } catch (error) {
+      console.error('Error adding service:', error);
+    }
+  };
 
   const handleConfirm = () => {
     console.log("Confirm actions for room", bookingRef);
@@ -138,7 +186,7 @@ const HousekeepingPopup = ({ bookingRef,roomType, onClose }) => {
           <h3>Services</h3>
 
           <div className="services-container">
-          {services.map(service => (
+          {allItems.map(service => (
             <ServicesCard
               key={service.id}
               service={service.name}
