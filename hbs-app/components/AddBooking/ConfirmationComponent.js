@@ -46,7 +46,7 @@ const ConfirmationComponent = ({ onPreviousStep, onBookingDetails, guestDetails 
                 updateBookedBRN(brnId.brn, bookingDetails.roomNumbers)
                 addGuestToBRNGuest(primaryGuestId, brnId.brn);
     
-                window.location.href = '/dashboard';
+                // window.location.href = '/dashboard';
             } else {
                 console.error('Primary guest ID not found.');
                 alert(`Booking confirmation failed`);
