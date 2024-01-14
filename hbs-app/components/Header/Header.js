@@ -11,21 +11,38 @@ const Header = () => {
     localStorage.setItem('isLoggedIn', false)
   }
 
+  const getDashboardLink = () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const userType = localStorage.getItem('type');
+
+    if (userType === null) {
+      return '/';
+    }
+
+    if (userType === 'S') {
+      return '/admin';
+    } 
+
+    return '/dashboard';
+  };
+
   return (
     <header className='header'>
     <div className="logo">
+    <a href="/">  
         <img 
             src="/logoheader.png" 
             alt="Logo" 
             className="logo-image"
         />
+      </a>
     </div>
 
 
       {/* Navigation Buttons */}
       <nav>
         <ul>
-          <li><a href="/">Home</a></li>
+          <li><a href={getDashboardLink()}>Home</a></li>
           <li><a href="/roomandsuites">Room & Suites</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>

@@ -18,10 +18,10 @@ function Dashboard({ supervisorType }) {
   const [selectedBooking, setSelectedBooking] = useState(null);
   const [rooms, setRooms] = useState([]);
   const [bookings, setBookings] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleBookingClick = (booking) => {
     setSelectedBooking({ ...booking, type: 'frontdesk' });
-    console.log(selectedBooking);
   };
 
   const handleHousekeepingClick = (booking) => {
@@ -42,8 +42,6 @@ function Dashboard({ supervisorType }) {
   //   />
   // };
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   const handleViewBillClick = () => {
     setIsPopupOpen(true);
   };
@@ -63,7 +61,19 @@ function Dashboard({ supervisorType }) {
     const date = new Date(dateString);
     return date.toLocaleString('en-US', options);
   };
+
+  // function formatDateTime(dateTimeString) {
+  //   const options = {
+  //     day: '2-digit',
+  //     month: '2-digit',
+  //     year: 'numeric',
+  //     hour: '2-digit',
+  //     minute: '2-digit',
+  //   };
   
+  //   const dateTime = new Date(dateTimeString);
+  //   return dateTime.toLocaleString('en-GB', options);
+  // }
   
   // const confirmedBookings = [
   //   {
@@ -84,25 +94,25 @@ function Dashboard({ supervisorType }) {
   //   },
   // ];
 
-  const otherGuests = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Smith' },
-    { id: 3, name: 'Emily Johnson' },
-    // ... more guests
-  ];
+  // const otherGuests = [
+  //   { id: 1, name: 'John Doe' },
+  //   { id: 2, name: 'Jane Smith' },
+  //   { id: 3, name: 'Emily Johnson' },
+  //   // ... more guests
+  // ];
   
 
-  const getRoomType = (roomNumber) => {
-    if (roomNumber >= 1 && roomNumber <= 5) {
-      return 'Twin';
-    } else if (roomNumber >= 6 && roomNumber <= 10) {
-      return 'Deluxe Twin';
-    } else if (roomNumber >= 11 && roomNumber <= 15) {
-      return 'Double Deck';
-    } else if (roomNumber >= 16 && roomNumber <= 20) {
-      return 'King';
-    }
-  };
+  // const getRoomType = (roomNumber) => {
+  //   if (roomNumber >= 1 && roomNumber <= 5) {
+  //     return 'Twin';
+  //   } else if (roomNumber >= 6 && roomNumber <= 10) {
+  //     return 'Deluxe Twin';
+  //   } else if (roomNumber >= 11 && roomNumber <= 15) {
+  //     return 'Double Deck';
+  //   } else if (roomNumber >= 16 && roomNumber <= 20) {
+  //     return 'King';
+  //   }
+  // };
 
   // const getRandomStatus = () => Math.random() > 0.5 ? 'occupied' : 'available';
 
@@ -167,7 +177,6 @@ function Dashboard({ supervisorType }) {
       }
     }
   
-    // Call the fetch functions
     fetchRooms();
     fetchBookings();
     checkAuth()
@@ -228,6 +237,8 @@ function Dashboard({ supervisorType }) {
             />
           ))}
         </div>
+
+        {/* Details Popup */}
 
         {selectedBooking && selectedBooking.type === 'frontdesk' && (
           <BookingDetailsPopup 

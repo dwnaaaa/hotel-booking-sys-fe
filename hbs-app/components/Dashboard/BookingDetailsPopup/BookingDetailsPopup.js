@@ -4,12 +4,28 @@ import '../PopupGlobal.css';
 
 const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, roomQuantity,primaryGuestName, otherGuests, onClose }) => {
   const [booking, setBooking] = useState([])
+  const [guests, setGuests] = useState([])
+  // const [specificguest, setSpecificGuest] = useState([])
+
   let bk = {}
   const roomTypeImages = [
     { type: 'Deluxe', url: 'images/rooms/twin.jpg' },
     { type: 'Suite', url: 'images/rooms/king.jpg' },
     // ... add other room types if needed
   ];
+
+  function formatDateTime(dateTimeString) {
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    };
+  
+    const dateTime = new Date(dateTimeString);
+    return dateTime.toLocaleString('en-GB', options);
+  }
 
   const findImageForRoomType = (type) => {
     const image = roomTypeImages.find(room => room.type === type);
@@ -35,8 +51,11 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
     }).then(response => {
       if(!response.ok) {
         console.log("check in failed")
+        alert('Check-in failed. Please try again.');
       } else {
         console.log("Checked in")
+        alert('Checked in successfully!');
+        onClose();
       }
     })
   }
@@ -59,6 +78,27 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
     })
   }
 
+  const fetchGuests = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/hbs/guest/all', {
+        headers: {
+          'Accept': 'application/json',
+        },
+        method: 'GET',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch guest data');
+      }
+  
+      const guestData = await response.json();
+      setGuests(guestData);
+      
+    } catch (error) {
+      console.error('Error fetching guest data:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchBooking = async () => {
       console.log(bookingRef)
@@ -75,7 +115,21 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
     }
 
     fetchBooking()
+    fetchGuests()
+
   },[bookingRef])
+
+  function findMatchingGuest(booking, guests) {
+    for (let i = 0; i < guests.length; i++) {
+      if (guests[i].guestId == booking.primaryGuestId) {
+        return guests[i]; // Return the matching guest if found
+      }
+    }
+  
+    return null; // Return null if no matching guest is found
+  }
+  
+  const specificguest = findMatchingGuest(booking, guests);
 
   return (
     <div className="popup-container">
@@ -92,7 +146,13 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
         
         <div className="overall-content">
         <h2>{booking.brn}</h2>
-        <h4>{booking.roomType}</h4>
+        <h4>
+          {booking.roomType === 'D' ? 'Deluxe' :
+          booking.roomType === 'G' ? 'Grand' :
+          booking.roomType === 'S' ? 'Suite' :
+          booking.roomType === 'E' ? 'Executive' :
+          'Invalid Room Type'}
+        </h4>
 
         <hr></hr>
 
@@ -103,11 +163,11 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
             <div className="left-column">
               <div className="checkin-checkout">
                 <div className="checkin">
-                  <p>{booking.checkInDate}</p>
+                  <p>{formatDateTime(booking.checkInDate)}</p>
                   <small>Check In</small>
                 </div>
                 <div className="checkout">
-                  <p>{booking.checkOutDate}</p>
+                  <p>{formatDateTime(booking.checkOutDate)}</p>
                   <small>Check Out</small>
                 </div>
               </div>
@@ -118,7 +178,8 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
             </div>
 
             <div className="right-column">
-              <p>{booking.primaryGuestId}</p>s
+              <p>{specificguest ? `${specificguest.firstName} ${specificguest.middleName || ''} ${specificguest.lastName}` : 'Guest not found'}</p>
+              {/* <p>{booking.primaryGuestId}</p> */}
               <small>Primary Guest</small>
               <div className="other-guests">
               {otherGuests ? 
@@ -133,10 +194,6 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
           </div>
         </div>
         </div>
-        
-        
-
-
 
         <div className="action-buttons">
           {/* <button onClick={onClose} className="btn-close">Close</button> */}
