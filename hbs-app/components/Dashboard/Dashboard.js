@@ -233,7 +233,7 @@ function Dashboard({ supervisorType }) {
             onConciergeClick={() => handleConciergeClick(room)}
             employeeType={employeeType}
             supervisorType={supervisorType}
-            data={room}
+            room={room}
             />
           ))}
         </div>
@@ -255,7 +255,7 @@ function Dashboard({ supervisorType }) {
 
         {selectedBooking && selectedBooking.type === 'housekeeping' && (
           <HousekeepingPopup
-            bookingRef={selectedBooking.bookingRef}
+            bookingRef={selectedBooking.brn}
             roomType={selectedBooking.roomType}
             onClose={closePopup}
           />
@@ -263,7 +263,7 @@ function Dashboard({ supervisorType }) {
 
         {selectedBooking && selectedBooking.type === 'kitchen' && (
           <KitchenPopup
-            bookingRef={selectedBooking.bookingRef}
+            bookingRef={selectedBooking.brn}
             roomType={selectedBooking.roomType}
             onClose={closePopup}
           />
@@ -271,7 +271,7 @@ function Dashboard({ supervisorType }) {
 
         {selectedBooking && selectedBooking.type === 'concierge' && (
           <ConciergePopup
-            bookingRef={selectedBooking.bookingRef}
+            bookingRef={selectedBooking.brn}
             onClose={closePopup}
           />
         )}

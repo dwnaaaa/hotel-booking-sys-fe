@@ -5,9 +5,8 @@ import '../PopupGlobal.css';
 const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, roomQuantity,primaryGuestName, otherGuests, onClose }) => {
   const [booking, setBooking] = useState([])
   const [guests, setGuests] = useState([])
+  const [primaryGuest, setPrimaryGuest] = useState({})
   // const [specificguest, setSpecificGuest] = useState([])
-
-  let bk = {}
   const roomTypeImages = [
     { type: 'Deluxe', url: 'images/rooms/twin.jpg' },
     { type: 'Suite', url: 'images/rooms/king.jpg' },
@@ -19,8 +18,6 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
     };
   
     const dateTime = new Date(dateTimeString);
@@ -78,46 +75,39 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
     })
   }
 
-  const fetchGuests = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/hbs/guest/all', {
-        headers: {
-          'Accept': 'application/json',
-        },
-        method: 'GET',
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to fetch guest data');
+  const fetchBooking = async () => {
+    const response = await fetch(`http://localhost:8080/hbs/booking/${bookingRef}`);
+    const bookingData = await response.json().then(data => {
+      setBooking(data)
+    })
+  }
+
+  const fetchPrimaryGuest = async () => {
+    if (booking && booking.primaryGuestId) {
+      try {
+        const response = await fetch(`http://localhost:8080/hbs/guest/${booking.primaryGuestId}`, {
+          headers: {
+            Accept: 'application/json',
+          },
+          method: 'GET',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch guest data');
+        }
+
+        const guestData = await response.json();
+        setPrimaryGuest(guestData);
+      } catch (error) {
+        console.error('Error fetching guest data:', error);
       }
-  
-      const guestData = await response.json();
-      setGuests(guestData);
-      
-    } catch (error) {
-      console.error('Error fetching guest data:', error);
     }
   };
 
   useEffect(() => {
-    const fetchBooking = async () => {
-      console.log(bookingRef)
-      const response = await fetch(`http://localhost:8080/hbs/booking/${bookingRef}`);
-      const bookingData = await response.json().then(data => {
-        setBooking(data)
-        bk = data
-        console.log(bk)
-        // console.log(booking.brn)
-      })
-      // setBooking(bookingData)
-      // console.log(booking)
-      // console.log(booking)
-    }
-
-    fetchBooking()
-    fetchGuests()
-
-  },[bookingRef])
+    fetchBooking();
+    fetchPrimaryGuest();
+  },[bookingRef, booking])
 
   function findMatchingGuest(booking, guests) {
     for (let i = 0; i < guests.length; i++) {
@@ -178,8 +168,8 @@ const BookingDetailsPopup = ({ bookingRef, checkInTime, checkOutTime, roomType, 
             </div>
 
             <div className="right-column">
-              <p>{specificguest ? `${specificguest.firstName} ${specificguest.middleName || ''} ${specificguest.lastName}` : 'Guest not found'}</p>
-              {/* <p>{booking.primaryGuestId}</p> */}
+              {/* <p>{primaryGuest ? `${primaryGuest.firstName} ${primaryGuest.middleName || ''} ${primaryGuest.lastName}` : 'Guest not found'}</p> */}
+              {primaryGuest ? `${primaryGuest.firstName} ${primaryGuest.middleName || ''} ${primaryGuest.lastName}` : 'NONE'}
               <small>Primary Guest</small>
               <div className="other-guests">
               {otherGuests ? 

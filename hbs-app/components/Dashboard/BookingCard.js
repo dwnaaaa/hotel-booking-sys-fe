@@ -35,7 +35,6 @@ const BookingCard = ({ booking, onBookingClick, onHousekeepingClick, onKitchenCl
 
 const dateTime = new Date(booking.checkInDate);
 // Format the date and time
-console.log(booking.checkInTime)
 const options = { 
   year: 'numeric', 
   month: 'long', 

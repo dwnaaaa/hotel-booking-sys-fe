@@ -30,7 +30,7 @@ const About = () => {
           <div className="team-member-card">
             <img src="/images/team/baclig.jpg" alt="Isabel Baclig" className="team-member-photo" />
             <div className="team-member-info">
-              <h3>Marie Ashley Ordoñez</h3>
+              <h3>Isabel Baclig</h3>
               <p>CEO</p>
             </div>
           </div>
